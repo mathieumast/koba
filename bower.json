@@ -1,0 +1,9 @@
+{
+    "name": "koba",
+    "main": "dist/koba.js",
+    "license": "MIT",
+    "dependencies": {
+        "backbone": ">=1.1.2",
+        "knockout": ">=3.1.0"
+    }
+}
