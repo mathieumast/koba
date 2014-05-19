@@ -82,11 +82,11 @@ Licensed under the MIT license
   koba.ViewModel = (function() {
     var listenTo, observable, observableArray, subscribe;
 
-    function _Class(__model) {
-      this.__model = __model;
+    function _Class(__data) {
+      this.__data = __data;
       this.__subscriptions = [];
       _.extend(this, Backbone.Events);
-      _.extend(this, this.__constructViewModel(this.__model));
+      _.extend(this, this.__constructViewModel(this.__data));
     }
 
     _Class.prototype.destroy = function() {

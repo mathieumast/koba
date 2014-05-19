@@ -1,9 +1,9 @@
 koba.ViewModel = class
 
-  constructor: (@__model) ->
+  constructor: (@__data) ->
     @__subscriptions = []
     _.extend @, Backbone.Events
-    _.extend @, @__constructViewModel @__model
+    _.extend @, @__constructViewModel @__data
     
   destroy: () ->
     @stopListening()
