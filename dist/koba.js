@@ -43,36 +43,33 @@ Licensed under the MIT license
         params = {};
       }
       _Class.__super__.initialize.apply(this, arguments);
-      return this.data = params != null ? params.data : void 0;
-    };
-
-    _Class.prototype.render = function(params) {
-      if (params == null) {
-        params = {};
-      }
-      _Class.__super__.render.apply(this, arguments);
-      this.data = params != null ? params.data : void 0;
-      if (this.data) {
-        return bindData();
+      if (params.data) {
+        return this.data = params.data;
       }
     };
 
-    _Class.prototype.bindData = function() {
+    _Class.prototype.bindData = function(data) {
+      if (data) {
+        this.data = data;
+      }
       this.unbindData();
       this.viewModel = new koba.ViewModel(this.data);
-      return ko.applyBindings(this.viewModel, this.$el[0]);
+      ko.applyBindings(this.viewModel, this.$el[0]);
+      return this;
     };
 
     _Class.prototype.unbindData = function() {
       if (this.viewModel) {
         ko.cleanNode(this.$el[0]);
-        return this.viewModel.destroy();
+        this.viewModel.destroy();
       }
+      return this;
     };
 
     _Class.prototype.remove = function() {
       this.unbindData();
-      return _Class.__super__.remove.apply(this, arguments);
+      _Class.__super__.remove.apply(this, arguments);
+      return this;
     };
 
     return _Class;
@@ -131,8 +128,10 @@ Licensed under the MIT license
     observable = function(property, value, model, viewModel) {
       var obs;
       obs = ko.observable(value);
-      listenTo(viewModel, model, property);
-      subscribe(viewModel, model, obs, property);
+      if (model && property) {
+        listenTo(viewModel, model, property);
+        subscribe(viewModel, model, obs, property);
+      }
       return obs;
     };
 

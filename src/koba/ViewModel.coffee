@@ -30,8 +30,9 @@ koba.ViewModel = class
     
   observable = (property, value, model, viewModel) ->
     obs = ko.observable value
-    listenTo viewModel, model, property
-    subscribe viewModel, model, obs, property
+    if model and property
+      listenTo viewModel, model, property
+      subscribe viewModel, model, obs, property
     obs
 
   observableArray = (property, array, collection, viewModel) ->
