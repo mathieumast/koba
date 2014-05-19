@@ -8,7 +8,7 @@ Licensed under the MIT license
 
 
 (function() {
-  var exports, koba, root, _ref,
+  var koba, root, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -25,7 +25,7 @@ Licensed under the MIT license
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
   if (typeof module !== 'undefined' && module.exports) {
-    exports = module.exports = koba;
+    module.exports = koba;
   }
 
   root.koba = koba;

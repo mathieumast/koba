@@ -11,5 +11,5 @@ if typeof define is 'function' and define.amd
     koba
 
 root = exports ? @
-exports = module.exports = koba if typeof module isnt 'undefined' and module.exports
+module.exports = koba if typeof module isnt 'undefined' and module.exports
 root.koba = koba
