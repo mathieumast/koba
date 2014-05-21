@@ -230,7 +230,7 @@ myView.render();
   > HTML:
 
 ~~~ html
-script type='text/html' id='tmpl-demo-nested'>
+<script type='text/html' id='tmpl-demo-nested'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
     <h2><span data-bind='text: firstName() + " " + lastName()'></h2>
