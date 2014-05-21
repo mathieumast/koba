@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koba, bridge between Knockout and Backbone</title>
+  <link href='//fonts.googleapis.com/css?family=Roboto:400,400italic,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="/css/main.css">
+<div class="navigation">
+    <div class="navigation-inner">
+        <ul>
+            <li class="site-name"><a href="/">Koba</a></li>
+            
+            <li><a href="/exemples/" >Exemples</a></li>
+            
+            <li><a href="/license/" >License</a></li>
+            
+        </ul>
+    </div>
+</div>
+
+</head>
+<body>
+  <div class="container">
+    <h1><a href="http://github.com/mathieumast/koba">Koba</a></h1>
+    
+<h2 id="live-examples">Live examples</h2>
+
+<h3 id="backbone-model-live-example">Backbone model live example</h3>
+
+<script type="text/html" id="tmpl-demo-model">
+    <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
+    <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
+    <h2>Hello, <span data-bind='text: firstName() + " " + lastName()'></span>!</h2>
+</script>
+
+<div id="content-demo-model" class="demo"></div>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function() {
+var myModel = new Backbone.Model({
+    firstName: "John",
+    lastName: "Smith"
+});
+var MyView = koba.View.extend({
+    el: '#content-demo-model',
+    render: function() {
+        this.$el.html("<div id='my-view' data-bind='template: {name: \"tmpl-demo-model\"}'></div>");
+        myView.bindData();
+    }
+});
+var myView = new MyView({data: myModel});
+myView.render();
+};
+/*]]>*/
+</script>
+
+<blockquote>
+  <p>HTML:</p>
+</blockquote>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#070;font-weight:bold">&lt;script</span> <span style="color:#b48">type</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text/html</span><span style="color:#710">'</span></span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tmpl-demo-model</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p&gt;</span>First name: <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: firstName, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p&gt;</span>Last name: <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: lastName, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;h2&gt;</span>Hello, <span style="color:#070;font-weight:bold">&lt;span</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text: firstName() + &quot; &quot; + lastName()</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/span&gt;</span>!<span style="color:#070;font-weight:bold">&lt;/h2&gt;</span></span>
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span><span style="color:#070;font-weight:bold">&lt;/script&gt;</span>
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span><span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">content-demo-model</span><span style="color:#710">'</span></span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">demo</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+
+<blockquote>
+  <p>Javascript:</p>
+</blockquote>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> myModel = <span style="color:#080;font-weight:bold">new</span> Backbone.Model({
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">John</span><span style="color:#710">&quot;</span></span>,
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Smith</span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>});
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#080;font-weight:bold">var</span> MyView = koba.View.extend({
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#606">el</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#content-demo-model</span><span style="color:#710">'</span></span>,
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#06B;font-weight:bold">render</span>: <span style="color:#080;font-weight:bold">function</span>() {
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>.html(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">&lt;div id='my-view' data-bind='template: {name: </span><span style="color:#b0b">\&quot;</span><span style="color:#D20">tmpl-demo-model</span><span style="color:#b0b">\&quot;</span><span style="color:#D20">}'&gt;&lt;/div&gt;</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        myView.bindData();
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    }
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>});
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView({<span style="color:#606">data</span>: myModel});
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>myView.render();
+</pre></div>
+</div>
+</div>
+
+  </div>
+<div class="github-fork-ribbon-wrapper right fixed" style="width: 150px;height: 150px;position: fixed;overflow: hidden;top: 0;z-index: 9999;pointer-events: none;right: 0;"><div class="github-fork-ribbon" style="position: absolute;padding: 2px 0;background-color: #333;background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));-webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);-moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);z-index: 9999;pointer-events: auto;top: 42px;right: -43px;-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-ms-transform: rotate(45deg);-o-transform: rotate(45deg);transform: rotate(45deg);"><a href="http://github.com/mathieumast/koba" style="font: 700 13px 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #fff;text-decoration: none;text-shadow: 0 -1px rgba(0, 0, 0, 0.5);text-align: center;width: 200px;line-height: 20px;display: inline-block;padding: 2px 0;border-width: 1px 0;border-style: dotted;border-color: rgba(255, 255, 255, 0.7);">Fork me on GitHub</a></div></div>
+<script src="//cdn.jsdelivr.net/jquery/2.1.1/jquery.js"></script>
+<script src="//cdn.jsdelivr.net/underscorejs/1.6.0/underscore-min.js"></script>
+<script src="//cdn.jsdelivr.net/backbonejs/1.1.2/backbone-min.js"></script>
+<script src="//cdn.jsdelivr.net/knockout/3.1.0/knockout.js"></script>
+<script src="//rawgit.com/mathieumast/koba/master/dist/koba.js"></script>
+
+</body>
+</html>

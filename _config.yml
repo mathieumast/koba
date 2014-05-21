@@ -1,0 +1,15 @@
+title: Koba
+description: Koba, bridge between Knockout and Backbone
+url: /
+github: http://github.com/mathieumast/koba
+
+links:
+  - title: Exemples
+    url: exemples/
+  - title: License
+    url: license/
+
+markdown: kramdown
+permalink: pretty
+
+exclude: ["nbproject"]
