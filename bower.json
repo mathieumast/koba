@@ -2,7 +2,7 @@
     "name": "koba",
     "main": "dist/koba.js",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "dependencies": {
         "backbone": ">=1.1.2",
         "knockout": ">=3.1.0"

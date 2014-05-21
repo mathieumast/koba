@@ -12,38 +12,52 @@ koba.ViewModel = class
     
   __constructViewModel: (obj, parent, property) ->
     unless obj
-      res = observable property, null, parent, @
+      res = observe property, null, parent, @
     else if obj.attributes
       res = {}
       for elem, value of obj.attributes
         res[elem] = @__constructViewModel value, obj, elem
     else if obj.models
       tbl = []
-      for elem, value of obj.models
-        tbl.push @__constructViewModel value, obj, elem
-      res = observableArray property, tbl, obj, @
+      for value in obj.models
+        tbl.push @__constructViewModel value, obj, null
+      res = observeArray tbl, obj, @
     else if _.isArray obj
-      res = observableArray property, obj, parent, @
+      tbl = []
+      for value in obj.models
+        tbl.push @__constructViewModel value, obj, null
+      res = observeArray tbl, null, @
+    else if _.isObject obj
+      res = {}
+      for elem, value of obj
+        res[elem] = @__constructViewModel value, obj, elem
     else
-      res = observable property, obj, parent, @
+      res = observe property, obj, parent, @
     res
     
-  observable = (property, value, model, viewModel) ->
-    obs = ko.observable value
+  observe = (property, value, model, viewModel) ->
+    observable = ko.observable value
     if model and property
-      listenTo viewModel, model, property
-      subscribe viewModel, model, obs, property
-    obs
-
-  observableArray = (property, array, collection, viewModel) ->
-    ko.observableArray array
+      listenTo viewModel, model, observable, property
+      subscribe viewModel, model, observable, property
+    observable
     
-  listenTo = (viewModel, model, property) ->
+  listenTo = (viewModel, model, observable, property) ->
     viewModel.listenTo model, "change:#{property}", (model, value, options) ->
-      if typeof viewModel[property] is 'function'
-        viewModel[property](value)
+      observable(value)
         
-  subscribe = (viewModel, model, obs, property) ->
-    viewModel.__subscriptions.push obs.subscribe (value) ->
+  subscribe = (viewModel, model, observable, property) ->
+    viewModel.__subscriptions.push observable.subscribe (value) ->
       model.set(property, value)
-     
+
+  observeArray = (array, collection, viewModel) ->
+    observableArray = ko.observableArray array
+    if collection
+      listenCollectionTo viewModel, collection, observableArray
+    observableArray
+
+  listenCollectionTo = (viewModel, collection, observableArray) ->
+    viewModel.listenTo collection, "add", (model, collection, options) ->
+      observableArray.push viewModel.__constructViewModel model, collection, null
+    viewModel.listenTo collection, "remove", (model, collection, options) ->
+      observableArray.remove model
