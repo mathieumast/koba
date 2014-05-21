@@ -26,9 +26,9 @@
   <div class="container">
     <h1><a href="http://github.com/mathieumast/koba">Koba</a></h1>
     
-<h2 id="live-examples">Live examples</h2>
+<h2 id="live-exemples">Live exemples</h2>
 
-<h3 id="backbone-model-live-example">Backbone model live example</h3>
+<h3 id="backbone-model">Backbone model</h3>
 
 <script type="text/html" id="tmpl-demo-model">
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
@@ -37,21 +37,28 @@
 </script>
 
 <div id="content-demo-model" class="demo"></div>
+
 <script type="text/javascript">
 /*<![CDATA[*/
-window.onload = function() {
-var myModel = new Backbone.Model({
+function demoModel() {
+var Person = Backbone.Model.extend({
+    defaults: {
+        firstName: "",
+        lastName: ""
+    }
+});
+var person = new Person({
     firstName: "John",
     lastName: "Smith"
 });
 var MyView = koba.View.extend({
-    el: '#content-demo-model',
+    el: "#content-demo-model",
     render: function() {
-        this.$el.html("<div id='my-view' data-bind='template: {name: \"tmpl-demo-model\"}'></div>");
+        this.$el.html("<div data-bind='template: {name: \"tmpl-demo-model\"}'></div>");
         myView.bindData();
     }
 });
-var myView = new MyView({data: myModel});
+var myView = new MyView({data: person});
 myView.render();
 };
 /*]]>*/
@@ -77,22 +84,135 @@ myView.render();
 </blockquote>
 
 <div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> myModel = <span style="color:#080;font-weight:bold">new</span> Backbone.Model({
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">John</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Smith</span><span style="color:#710">&quot;</span></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>});
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#080;font-weight:bold">var</span> MyView = koba.View.extend({
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#606">el</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#content-demo-model</span><span style="color:#710">'</span></span>,
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#06B;font-weight:bold">render</span>: <span style="color:#080;font-weight:bold">function</span>() {
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        <span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>.html(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">&lt;div id='my-view' data-bind='template: {name: </span><span style="color:#b0b">\&quot;</span><span style="color:#D20">tmpl-demo-model</span><span style="color:#b0b">\&quot;</span><span style="color:#D20">}'&gt;&lt;/div&gt;</span><span style="color:#710">&quot;</span></span>);
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        myView.bindData();
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    }
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>});
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView({<span style="color:#606">data</span>: myModel});
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>myView.render();
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> Person = Backbone.Model.extend({
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">defaults</span>: {
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>,
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    }
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>});
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#080;font-weight:bold">var</span> person = <span style="color:#080;font-weight:bold">new</span> Person({
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">John</span><span style="color:#710">&quot;</span></span>,
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Smith</span><span style="color:#710">&quot;</span></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>});
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#080;font-weight:bold">var</span> MyView = koba.View.extend({
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#606">el</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#content-demo-model</span><span style="color:#710">&quot;</span></span>,
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#06B;font-weight:bold">render</span>: <span style="color:#080;font-weight:bold">function</span>() {
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>.html(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">&lt;div id='my-view' data-bind='template: {name: </span><span style="color:#b0b">\&quot;</span><span style="color:#D20">tmpl-demo-model</span><span style="color:#b0b">\&quot;</span><span style="color:#D20">}'&gt;&lt;/div&gt;</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        myView.bindData();
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    }
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>});
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView({<span style="color:#606">data</span>: person});
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>myView.render();
 </pre></div>
 </div>
 </div>
+
+<h3 id="backbone-model--collection">Backbone model &amp; collection</h3>
+
+<script type="text/html" id="tmpl-demo-collection">
+    <div data-bind="foreach: todos">
+        <p><input data-bind='value: val, valueUpdate: "keyup"' /> <span data-bind='text: val()'></span></p>
+    </div>
+    <div>
+        <form><input data-bind='value: todo.val' /> <button id='add' type='submit'>Add</button></form>
+    </div>
+</script>
+
+<div id="content-demo-collection" class="demo"></div>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+function demoCollection() {
+var Todo = Backbone.Model.extend({
+    defaults: {val: ""}
+});
+var Todos = Backbone.Collection.extend({model: Todo});
+var todos = new Todos([
+    {val: "Try Koba"},
+    {val: "Read Knockout documentation"}
+]);
+var todo = new Todo();
+var data = {todo: todo, todos: todos};
+var MyView = koba.View.extend({
+    events: {"submit form": "add"},
+    el: "#content-demo-collection",
+    render: function() {
+        this.$el.html("<div data-bind='template: {name: \"tmpl-demo-collection\"}'></div>");
+        myView.bindData();
+    },
+    add: function(e) {
+        e.preventDefault()
+        todos.add(this.data.todo.toJSON());
+        this.data.todo.clear();
+    }
+});
+var myView = new MyView({data: data});
+myView.render();
+};
+/*]]>*/
+</script>
+
+<blockquote>
+  <p>HTML:</p>
+</blockquote>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#070;font-weight:bold">&lt;script</span> <span style="color:#b48">type</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text/html</span><span style="color:#710">'</span></span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tmpl-demo-collection</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">foreach: todos</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">        <span style="color:#070;font-weight:bold">&lt;p&gt;</span><span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: val, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span> <span style="color:#070;font-weight:bold">&lt;span</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text: val()</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/span&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;/div&gt;</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;div&gt;</span></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">        <span style="color:#070;font-weight:bold">&lt;form&gt;</span><span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: todo.val</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span> <span style="color:#070;font-weight:bold">&lt;button</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">add</span><span style="color:#710">'</span></span> <span style="color:#b48">type</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">submit</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>Add<span style="color:#070;font-weight:bold">&lt;/button&gt;</span><span style="color:#070;font-weight:bold">&lt;/form&gt;</span></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;/div&gt;</span></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#070;font-weight:bold">&lt;/script&gt;</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">content-demo-collection</span><span style="color:#710">'</span></span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">demo</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+
+<blockquote>
+  <p>Javascript:</p>
+</blockquote>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> Todo = Backbone.Model.extend({
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">defaults</span>: {<span style="color:#606">val</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>}
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>});
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#080;font-weight:bold">var</span> Todos = Backbone.Collection.extend({<span style="color:#606">model</span>: Todo});
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#080;font-weight:bold">var</span> todos = <span style="color:#080;font-weight:bold">new</span> Todos([
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    {<span style="color:#606">val</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Try Koba</span><span style="color:#710">&quot;</span></span>},
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    {<span style="color:#606">val</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Read Knockout documentation</span><span style="color:#710">&quot;</span></span>}
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>]);
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="color:#080;font-weight:bold">var</span> todo = <span style="color:#080;font-weight:bold">new</span> Todo();
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="color:#080;font-weight:bold">var</span> data = {<span style="color:#606">todo</span>: todo, <span style="color:#606">todos</span>: todos};
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#080;font-weight:bold">var</span> MyView = koba.View.extend({
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#606">events</span>: {<span style="color:#606"><span style="color:#404">&quot;</span><span>submit form</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">add</span><span style="color:#710">&quot;</span></span>},
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#606">el</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#content-demo-collection</span><span style="color:#710">&quot;</span></span>,
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span style="color:#06B;font-weight:bold">render</span>: <span style="color:#080;font-weight:bold">function</span>() {
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        <span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>.html(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">&lt;div data-bind='template: {name: </span><span style="color:#b0b">\&quot;</span><span style="color:#D20">tmpl-demo-collection</span><span style="color:#b0b">\&quot;</span><span style="color:#D20">}'&gt;&lt;/div&gt;</span><span style="color:#710">&quot;</span></span>);
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        myView.bindData();
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    },
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span style="color:#06B;font-weight:bold">add</span>: <span style="color:#080;font-weight:bold">function</span>(e) {
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>        e.preventDefault()
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        todos.add(<span style="color:#950">this</span>.data.todo.toJSON());
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>        <span style="color:#950">this</span>.data.todo.clear();
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    }
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>});
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView({<span style="color:#606">data</span>: data});
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>myView.render();
+</pre></div>
+</div>
+</div>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function() {
+    demoModel();
+    demoCollection();
+}
+/*]]>*/
+</script>
+
 
   </div>
 <div class="github-fork-ribbon-wrapper right fixed" style="width: 150px;height: 150px;position: fixed;overflow: hidden;top: 0;z-index: 9999;pointer-events: none;right: 0;"><div class="github-fork-ribbon" style="position: absolute;padding: 2px 0;background-color: #333;background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));-webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);-moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);z-index: 9999;pointer-events: auto;top: 42px;right: -43px;-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-ms-transform: rotate(45deg);-o-transform: rotate(45deg);transform: rotate(45deg);"><a href="http://github.com/mathieumast/koba" style="font: 700 13px 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #fff;text-decoration: none;text-shadow: 0 -1px rgba(0, 0, 0, 0.5);text-align: center;width: 200px;line-height: 20px;display: inline-block;padding: 2px 0;border-width: 1px 0;border-style: dotted;border-color: rgba(255, 255, 255, 0.7);">Fork me on GitHub</a></div></div>
@@ -100,7 +220,7 @@ myView.render();
 <script src="//cdn.jsdelivr.net/underscorejs/1.6.0/underscore-min.js"></script>
 <script src="//cdn.jsdelivr.net/backbonejs/1.1.2/backbone-min.js"></script>
 <script src="//cdn.jsdelivr.net/knockout/3.1.0/knockout.js"></script>
-<script src="//rawgit.com/mathieumast/koba/master/dist/koba.js"></script>
+<script src="http://mathieumast.github.io/koba//js/koba.js"></script>
 
 </body>
 </html>
