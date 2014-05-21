@@ -24,7 +24,7 @@ koba.ViewModel = class
       res = observeArray tbl, obj, @
     else if _.isArray obj
       tbl = []
-      for value in obj.models
+      for value in obj
         tbl.push @__constructViewModel value, obj, null
       res = observeArray tbl, null, @
     else if _.isObject obj
