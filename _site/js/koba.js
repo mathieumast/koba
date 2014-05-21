@@ -99,7 +99,7 @@ Licensed under the MIT license
     };
 
     _Class.prototype.__constructViewModel = function(obj, parent, property) {
-      var elem, res, tbl, value, _i, _j, _len, _len1, _ref1, _ref2, _ref3;
+      var elem, res, tbl, value, _i, _j, _len, _len1, _ref1, _ref2;
       if (!obj) {
         res = observe(property, null, parent, this);
       } else if (obj.attributes) {
@@ -119,9 +119,8 @@ Licensed under the MIT license
         res = observeArray(tbl, obj, this);
       } else if (_.isArray(obj)) {
         tbl = [];
-        _ref3 = obj.models;
-        for (_j = 0, _len1 = _ref3.length; _j < _len1; _j++) {
-          value = _ref3[_j];
+        for (_j = 0, _len1 = obj.length; _j < _len1; _j++) {
+          value = obj[_j];
           tbl.push(this.__constructViewModel(value, obj, null));
         }
         res = observeArray(tbl, null, this);

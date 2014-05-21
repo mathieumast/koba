@@ -8,7 +8,7 @@
 
 * Automatic models and collections updates on view change
 
-* Compatible with Backbone models and collections (and neested models and collections)
+* Compatible with Backbone models and collections (and nested models and collections)
 
 ## Dependencies
 
