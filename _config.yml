@@ -10,6 +10,8 @@ links:
     url: license/
 
 markdown: kramdown
+kramdown:
+  use_coderay: true
 permalink: pretty
 
 exclude: ["nbproject"]
