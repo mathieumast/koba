@@ -1,6 +1,6 @@
 ## License
 
-The MIT License (MIT)
+The [MIT license](http://opensource.org/licenses/mit-license.php) (MIT)
 
 Copyright (c) 2014 Mathieu MAST
 

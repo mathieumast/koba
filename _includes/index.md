@@ -1,5 +1,11 @@
 [Koba]({{ site.github }}), bridge between Knockout and Backbone.
 
+## Download
+
+* [koba.min.js (minified)](http://mathieumast.github.io/koba//js/koba.min.js)
+
+* [koba.js](http://mathieumast.github.io/koba//js/koba.js)
+
 ## Features
 
 * Two-way data-binding with Knockout for Backbone
@@ -10,6 +16,10 @@
 
 * Compatible with Backbone models and collections (and nested models and collections)
 
+* Free and open source [MIT license](http://opensource.org/licenses/mit-license.php)
+
+* Small (4kb minified)
+
 ## Dependencies
 
 Koba has the following dependencies:
@@ -17,3 +27,7 @@ Koba has the following dependencies:
 * [Knouckout](http://knockoutjs.com/) (>= 3.0.0)
 
 * [Backbone](http://backbonejs.org/) (>= 1.0.0)
+
+* [Underscore.js](http://underscorejs.org/) (>= 1.5.0)
+
+* [jQuery.js](http://jquery.com/)
