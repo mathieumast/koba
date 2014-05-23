@@ -1,11 +1,11 @@
 ## Live exemples
 
-### <a name='demo-model'></a> koba.View with Backbone model
+### <a name='demo-model'></a> Working with koba.View and Backbone model
 
 <script type='text/html' id='tmpl-demo-model'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2>Hello, <span data-bind='text: firstName() + " " + lastName()'></span>!</h2>
+    <h2 data-bind='text: "Hello, " + firstName() + " " + lastName() + "!"'></h2>
 </script>
 <div id='content-demo-model' class='demo'></div>
 
@@ -37,18 +37,18 @@ myView.render().bindData();
 
   > HTML:
 
-~~~ html
+{% highlight html %}
 <script type='text/html' id='tmpl-demo-model'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2>Hello, <span data-bind='text: firstName() + " " + lastName()'></span>!</h2>
+    <h2 data-bind='text: "Hello, " + firstName() + " " + lastName() + "!"'></h2>
 </script>
 <div id='content-demo-model' class='demo'></div>
-~~~
+{% endhighlight %}
 
   > Javascript:
 
-~~~ javascript
+{% highlight javascript %}
 var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
@@ -68,9 +68,9 @@ var MyView = koba.View.extend({
 });
 var myView = new MyView({data: person});
 myView.render().bindData();
-~~~
+{% endhighlight %}
 
-### <a name='demo-collection'></a> koba.View with Backbone model & collection
+### <a name='demo-collection'></a> Working with koba.View and Backbone model & collection
 
 <script type='text/html' id='tmpl-demo-collection'>
     <div data-bind="foreach: todos">
@@ -116,7 +116,7 @@ myView.render().bindData();
 
   > HTML:
 
-~~~ html
+{% highlight html %}
 <script type='text/html' id='tmpl-demo-collection'>
     <div data-bind="foreach: todos">
         <p><input data-bind='value: val, valueUpdate: "keyup"' /> <span data-bind='text: val()'></span></p>
@@ -126,11 +126,11 @@ myView.render().bindData();
     </div>
 </script>
 <div id='content-demo-collection' class='demo'></div>
-~~~
+{% endhighlight %}
 
   > Javascript:
 
-~~~ javascript
+{% highlight javascript %}
 var Todo = Backbone.Model.extend({
     defaults: {val: ""}
 });
@@ -156,9 +156,9 @@ var MyView = koba.View.extend({
 });
 var myView = new MyView({data: data});
 myView.render().bindData();
-~~~
+{% endhighlight %}
 
-### <a name='demo-nested'></a> koba.View with Backbone nested model and collection
+### <a name='demo-nested'></a> Working with koba.View and Backbone nested model & collection
 
 <script type='text/html' id='tmpl-demo-nested'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
@@ -229,7 +229,7 @@ myView.render().bindData();
 
   > HTML:
 
-~~~ html
+{% highlight html %}
 <script type='text/html' id='tmpl-demo-nested'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
@@ -244,11 +244,11 @@ myView.render().bindData();
     </div>
 </script>
 <div id='content-demo-nested' class='demo'></div>
-~~~
+{% endhighlight %}
 
   > Javascript:
 
-~~~ javascript
+{% highlight javascript %}
 var Address = Backbone.Model.extend({
     defaults: {
         number: "",
@@ -294,7 +294,7 @@ var MyView = koba.View.extend({
 });
 var myView = new MyView({data: person});
 myView.render().bindData();
-~~~
+{% endhighlight %}
 
 ### <a name="demo-viewmodel"></a> Working directly with koba.ViewModel and Backbone.View
 
@@ -343,18 +343,18 @@ myView.render();
 
   > HTML:
 
-~~~ html
+{% highlight html %}
 <script type='text/html' id='tmpl-demo-viewmodel'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
     <h2>Hello, <span data-bind='text: firstName() + " " + lastName()'></span>!</h2>
 </script>
 <div id='content-demo-viewmodel' class='demo'></div>
-~~~
+{% endhighlight %}
 
   > Javascript:
 
-~~~ javascript
+{% highlight javascript %}
 var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
@@ -384,7 +384,7 @@ var MyView = Backbone.View.extend({
 });
 var myView = new MyView({data: person});
 myView.render();
-~~~
+{% endhighlight %}
 
 
 

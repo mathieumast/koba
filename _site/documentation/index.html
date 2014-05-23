@@ -47,22 +47,14 @@ You can use it in your view implementation instead of koba.View (for exemple, if
 
 <p>Initialize a new ViewModel from data.</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> myData = {}; <span style="color:#777">// define your data</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span style="color:#080;font-weight:bold">var</span> myViewModel = <span style="color:#080;font-weight:bold">new</span> koba.ViewModel(myData);
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">myData</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// define your data
+</span><span class="kd">var</span> <span class="nx">myViewModel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">koba</span><span class="p">.</span><span class="nx">ViewModel</span><span class="p">(</span><span class="nx">myData</span><span class="p">);</span></code></pre></div>
 
 <h5 id="destroy">destroy</h5>
 
 <p>Destroy the ViewModel (remove data-binding).</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>myViewModel.destroy();
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="nx">myViewModel</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span></code></pre></div>
 
 <h4 id="kobaview">koba.View</h4>
 
@@ -77,32 +69,20 @@ The ViewModel livecycle is managed by the View to prevent memory leak.</p>
 
 <p>Extends koba.View (see <a href="http://backbonejs.org/#View-extend">http://backbonejs.org/#View-extend</a>).</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> MyView = koba.View.extend({
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>    <span style="color:#777">// define your view (events, render function...)</span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>});
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">MyView</span> <span class="o">=</span> <span class="nx">koba</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="c1">// define your view (events, render function...)
+</span><span class="p">});</span></code></pre></div>
 
 <h5 id="constructor-1">constructor</h5>
 
 <p>With data:</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> myData = {}; <span style="color:#777">// define your data</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView({<span style="color:#606">data</span>: myData}); <span style="color:#777">// Create view with data</span>
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">myData</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// define your data
+</span><span class="kd">var</span> <span class="nx">myView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyView</span><span class="p">({</span><span class="na">data</span><span class="p">:</span> <span class="nx">myData</span><span class="p">});</span> <span class="sr">/</span><span class="err">/ Create view with data</span></code></pre></div>
 
 <p>Without data:</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView(); <span style="color:#777">// Create view without data</span>
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">myView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyView</span><span class="p">();</span> <span class="sr">/</span><span class="err">/ Create view without data</span></code></pre></div>
 
 <h5 id="render">render</h5>
 
@@ -110,50 +90,30 @@ The ViewModel livecycle is managed by the View to prevent memory leak.</p>
 
 <p>The HTML produced can use declarative bindings from Knockout (see <a href="http://knockoutjs.com/documentation/introduction.html">http://knockoutjs.com/documentation/introduction.html</a>).</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>myView.render();
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="nx">myView</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span></code></pre></div>
 
 <h5 id="binddata">bindData</h5>
 
 <p>Bind data with existing data in view:</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>myView.bindData();
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="nx">myView</span><span class="p">.</span><span class="nx">bindData</span><span class="p">();</span></code></pre></div>
 
 <p>Bind data with new data (data in view is changed by the new data):</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> myData = {}; <span style="color:#777">// define your data</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>myView.bindData(myData);
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">myData</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// define your data
+</span><span class="nx">myView</span><span class="p">.</span><span class="nx">bindData</span><span class="p">(</span><span class="nx">myData</span><span class="p">);</span></code></pre></div>
 
 <h5 id="remove">remove</h5>
 
 <p>Remove the view (see <a href="http://backbonejs.org/#View-remove">http://backbonejs.org/#View-remove</a>), remove data-binding and remove data in view.</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>myView.remove();
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="nx">myView</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span></code></pre></div>
 
 <h5 id="unbinddata">unbindData</h5>
 
 <p>Remove data-binding. Data in view is not removed.</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>myView.unbindData();
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="nx">myView</span><span class="p">.</span><span class="nx">unbindData</span><span class="p">();</span></code></pre></div>
 
   </div>
 <div class="github-fork-ribbon-wrapper right fixed" style="width: 150px;height: 150px;position: fixed;overflow: hidden;top: 0;z-index: 9999;pointer-events: none;right: 0;"><div class="github-fork-ribbon" style="position: absolute;padding: 2px 0;background-color: #333;background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));-webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);-moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);z-index: 9999;pointer-events: auto;top: 42px;right: -43px;-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-ms-transform: rotate(45deg);-o-transform: rotate(45deg);transform: rotate(45deg);"><a href="http://github.com/mathieumast/koba" style="font: 700 13px 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #fff;text-decoration: none;text-shadow: 0 -1px rgba(0, 0, 0, 0.5);text-align: center;width: 200px;line-height: 20px;display: inline-block;padding: 2px 0;border-width: 1px 0;border-style: dotted;border-color: rgba(255, 255, 255, 0.7);">Fork me on GitHub</a></div></div>

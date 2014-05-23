@@ -17,18 +17,18 @@ See exemple [Working directly with koba.ViewModel and Backbone.View]({{ site.url
 
 Initialize a new ViewModel from data.
 
-~~~ javascript
+{% highlight javascript %}
 var myData = {}; // define your data
 var myViewModel = new koba.ViewModel(myData);
-~~~
+{% endhighlight %}
 
 ##### destroy
 
 Destroy the ViewModel (remove data-binding).
 
-~~~ javascript
+{% highlight javascript %}
 myViewModel.destroy();
-~~~
+{% endhighlight %}
 
 #### koba.View
 
@@ -43,26 +43,26 @@ See [many exemples]({{ site.url}}/exemples/).
 
 Extends koba.View (see [http://backbonejs.org/#View-extend](http://backbonejs.org/#View-extend)).
 
-~~~ javascript
+{% highlight javascript %}
 var MyView = koba.View.extend({
     // define your view (events, render function...)
 });
-~~~
+{% endhighlight %}
 
 ##### constructor
 
 With data:
 
-~~~ javascript
+{% highlight javascript %}
 var myData = {}; // define your data
 var myView = new MyView({data: myData}); // Create view with data
-~~~
+{% endhighlight %}
 
 Without data:
 
-~~~ javascript
+{% highlight javascript %}
 var myView = new MyView(); // Create view without data
-~~~
+{% endhighlight %}
 
 ##### render
 
@@ -70,37 +70,37 @@ Render the view (see [http://backbonejs.org/#View-render](http://backbonejs.org/
 
 The HTML produced can use declarative bindings from Knockout (see [http://knockoutjs.com/documentation/introduction.html](http://knockoutjs.com/documentation/introduction.html)).
 
-~~~ javascript
+{% highlight javascript %}
 myView.render();
-~~~
+{% endhighlight %}
 
 ##### bindData
 
 Bind data with existing data in view:
 
-~~~ javascript
+{% highlight javascript %}
 myView.bindData();
-~~~
+{% endhighlight %}
 
 Bind data with new data (data in view is changed by the new data):
 
-~~~ javascript
+{% highlight javascript %}
 var myData = {}; // define your data
 myView.bindData(myData);
-~~~
+{% endhighlight %}
 
 ##### remove
 
 Remove the view (see [http://backbonejs.org/#View-remove](http://backbonejs.org/#View-remove)), remove data-binding and remove data in view.
 
-~~~ javascript
+{% highlight javascript %}
 myView.remove();
-~~~
+{% endhighlight %}
 
 ##### unbindData
 
 Remove data-binding. Data in view is not removed.
 
-~~~ javascript
+{% highlight javascript %}
 myView.unbindData();
-~~~
+{% endhighlight %}

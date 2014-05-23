@@ -30,12 +30,12 @@
     
 <h2 id="live-exemples">Live exemples</h2>
 
-<h3 id="a-namedemo-modela-kobaview-with-backbone-model"><a name="demo-model"></a> koba.View with Backbone model</h3>
+<h3 id="a-namedemo-modela-working-with-kobaview-and-backbone-model"><a name="demo-model"></a> Working with koba.View and Backbone model</h3>
 
 <script type="text/html" id="tmpl-demo-model">
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2>Hello, <span data-bind='text: firstName() + " " + lastName()'></span>!</h2>
+    <h2 data-bind='text: "Hello, " + firstName() + " " + lastName() + "!"'></h2>
 </script>
 
 <div id="content-demo-model" class="demo"></div>
@@ -70,46 +70,38 @@ myView.render().bindData();
   <p>HTML:</p>
 </blockquote>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#070;font-weight:bold">&lt;script</span> <span style="color:#b48">type</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text/html</span><span style="color:#710">'</span></span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tmpl-demo-model</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p&gt;</span>First name: <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: firstName, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p&gt;</span>Last name: <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: lastName, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;h2&gt;</span>Hello, <span style="color:#070;font-weight:bold">&lt;span</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text: firstName() + &quot; &quot; + lastName()</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/span&gt;</span>!<span style="color:#070;font-weight:bold">&lt;/h2&gt;</span></span>
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span><span style="color:#070;font-weight:bold">&lt;/script&gt;</span>
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span><span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">content-demo-model</span><span style="color:#710">'</span></span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">demo</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/div&gt;</span>
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/html'</span> <span class="na">id=</span><span class="s">'tmpl-demo-model'</span><span class="nt">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">First</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: firstName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Last</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: lastName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h2</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: "Hello, " + firstName() + " " + lastName() + "!"'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">h2&gt;</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'content-demo-model'</span> <span class="na">class=</span><span class="s">'demo'</span><span class="nt">&gt;&lt;/div&gt;</span></code></pre></div>
 
 <blockquote>
   <p>Javascript:</p>
 </blockquote>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> Person = Backbone.Model.extend({
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">defaults</span>: {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    }
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>});
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#080;font-weight:bold">var</span> person = <span style="color:#080;font-weight:bold">new</span> Person({
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">John</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Smith</span><span style="color:#710">&quot;</span></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>});
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#080;font-weight:bold">var</span> MyView = koba.View.extend({
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#606">el</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#content-demo-model</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#06B;font-weight:bold">render</span>: <span style="color:#080;font-weight:bold">function</span>() {
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>        <span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>.html(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">&lt;div id='my-view' data-bind='template: {name: </span><span style="color:#b0b">\&quot;</span><span style="color:#D20">tmpl-demo-model</span><span style="color:#b0b">\&quot;</span><span style="color:#D20">}'&gt;&lt;/div&gt;</span><span style="color:#710">&quot;</span></span>);
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        <span style="color:#080;font-weight:bold">return</span> <span style="color:#950">this</span>;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    }
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>});
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView({<span style="color:#606">data</span>: person});
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>myView.render().bindData();
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">defaults</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">firstName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">lastName</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span>
+    <span class="na">firstName</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="s2">"Smith"</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">MyView</span> <span class="o">=</span> <span class="nx">koba</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#content-demo-model"</span><span class="p">,</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s2">"&lt;div id='my-view' data-bind='template: {name: \"tmpl-demo-model\"}'&gt;&lt;/div&gt;"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">myView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyView</span><span class="p">({</span><span class="na">data</span><span class="p">:</span> <span class="nx">person</span><span class="p">});</span>
+<span class="nx">myView</span><span class="p">.</span><span class="nx">render</span><span class="p">().</span><span class="nx">bindData</span><span class="p">();</span></code></pre></div>
 
-<h3 id="a-namedemo-collectiona-kobaview-with-backbone-model--collection"><a name="demo-collection"></a> koba.View with Backbone model &amp; collection</h3>
+<h3 id="a-namedemo-collectiona-working-with-kobaview-and-backbone-model--collection"><a name="demo-collection"></a> Working with koba.View and Backbone model &amp; collection</h3>
 
 <script type="text/html" id="tmpl-demo-collection">
     <div data-bind="foreach: todos">
@@ -158,55 +150,47 @@ myView.render().bindData();
   <p>HTML:</p>
 </blockquote>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#070;font-weight:bold">&lt;script</span> <span style="color:#b48">type</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text/html</span><span style="color:#710">'</span></span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tmpl-demo-collection</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">foreach: todos</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span></span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">        <span style="color:#070;font-weight:bold">&lt;p&gt;</span><span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: val, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span> <span style="color:#070;font-weight:bold">&lt;span</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text: val()</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/span&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;/div&gt;</span></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;div&gt;</span></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">        <span style="color:#070;font-weight:bold">&lt;form&gt;</span><span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: todo.val</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span> <span style="color:#070;font-weight:bold">&lt;button</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">add</span><span style="color:#710">'</span></span> <span style="color:#b48">type</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">submit</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>Add<span style="color:#070;font-weight:bold">&lt;/button&gt;</span><span style="color:#070;font-weight:bold">&lt;/form&gt;</span></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;/div&gt;</span></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="color:#070;font-weight:bold">&lt;/script&gt;</span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">content-demo-collection</span><span style="color:#710">'</span></span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">demo</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/div&gt;</span>
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/html'</span> <span class="na">id=</span><span class="s">'tmpl-demo-collection'</span><span class="nt">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s2">"foreach: todos"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: val, valueUpdate: "keyup"'</span> <span class="o">/&gt;</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: val()'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">span&gt;&lt;/p&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/</span><span class="err">div&gt;</span>
+    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">form</span><span class="o">&gt;&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: todo.val'</span> <span class="o">/&gt;</span> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">id</span><span class="o">=</span><span class="s1">'add'</span> <span class="nx">type</span><span class="o">=</span><span class="s1">'submit'</span><span class="o">&gt;</span><span class="nx">Add</span><span class="o">&lt;</span><span class="sr">/</span><span class="err">button&gt;&lt;/form&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/</span><span class="err">div&gt;</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'content-demo-collection'</span> <span class="na">class=</span><span class="s">'demo'</span><span class="nt">&gt;&lt;/div&gt;</span></code></pre></div>
 
 <blockquote>
   <p>Javascript:</p>
 </blockquote>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> Todo = Backbone.Model.extend({
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">defaults</span>: {<span style="color:#606">val</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>}
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>});
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="color:#080;font-weight:bold">var</span> Todos = Backbone.Collection.extend({<span style="color:#606">model</span>: Todo});
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="color:#080;font-weight:bold">var</span> todos = <span style="color:#080;font-weight:bold">new</span> Todos([
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    {<span style="color:#606">val</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Try Koba</span><span style="color:#710">&quot;</span></span>},
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    {<span style="color:#606">val</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Read Knockout documentation</span><span style="color:#710">&quot;</span></span>}
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>]);
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="color:#080;font-weight:bold">var</span> todo = <span style="color:#080;font-weight:bold">new</span> Todo();
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="color:#080;font-weight:bold">var</span> data = {<span style="color:#606">todo</span>: todo, <span style="color:#606">todos</span>: todos};
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#080;font-weight:bold">var</span> MyView = koba.View.extend({
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    <span style="color:#606">events</span>: {<span style="color:#606"><span style="color:#404">&quot;</span><span>submit form</span><span style="color:#404">&quot;</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">add</span><span style="color:#710">&quot;</span></span>},
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#606">el</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#content-demo-collection</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span style="color:#06B;font-weight:bold">render</span>: <span style="color:#080;font-weight:bold">function</span>() {
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        <span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>.html(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">&lt;div data-bind='template: {name: </span><span style="color:#b0b">\&quot;</span><span style="color:#D20">tmpl-demo-collection</span><span style="color:#b0b">\&quot;</span><span style="color:#D20">}'&gt;&lt;/div&gt;</span><span style="color:#710">&quot;</span></span>);
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>        <span style="color:#080;font-weight:bold">return</span> <span style="color:#950">this</span>;
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    },
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>    <span style="color:#06B;font-weight:bold">add</span>: <span style="color:#080;font-weight:bold">function</span>(e) {
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>        e.preventDefault()
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        todos.add(<span style="color:#950">this</span>.data.todo.toJSON());
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>        <span style="color:#950">this</span>.data.todo.clear();
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>    }
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>});
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView({<span style="color:#606">data</span>: data});
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>myView.render().bindData();
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Todo</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">defaults</span><span class="p">:</span> <span class="p">{</span><span class="na">val</span><span class="p">:</span> <span class="s2">""</span><span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">Todos</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span><span class="na">model</span><span class="p">:</span> <span class="nx">Todo</span><span class="p">});</span>
+<span class="kd">var</span> <span class="nx">todos</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Todos</span><span class="p">([</span>
+    <span class="p">{</span><span class="na">val</span><span class="p">:</span> <span class="s2">"Try Koba"</span><span class="p">},</span>
+    <span class="p">{</span><span class="na">val</span><span class="p">:</span> <span class="s2">"Read Knockout documentation"</span><span class="p">}</span>
+<span class="p">]);</span>
+<span class="kd">var</span> <span class="nx">todo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Todo</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span><span class="na">todo</span><span class="p">:</span> <span class="nx">todo</span><span class="p">,</span> <span class="na">todos</span><span class="p">:</span> <span class="nx">todos</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">MyView</span> <span class="o">=</span> <span class="nx">koba</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">events</span><span class="p">:</span> <span class="p">{</span><span class="s2">"submit form"</span><span class="p">:</span> <span class="s2">"add"</span><span class="p">},</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#content-demo-collection"</span><span class="p">,</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s2">"&lt;div data-bind='template: {name: \"tmpl-demo-collection\"}'&gt;&lt;/div&gt;"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="na">add</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+        <span class="nx">todos</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">todo</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">());</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">todo</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">myView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyView</span><span class="p">({</span><span class="na">data</span><span class="p">:</span> <span class="nx">data</span><span class="p">});</span>
+<span class="nx">myView</span><span class="p">.</span><span class="nx">render</span><span class="p">().</span><span class="nx">bindData</span><span class="p">();</span></code></pre></div>
 
-<h3 id="a-namedemo-nesteda-kobaview-with-backbone-nested-model-and-collection"><a name="demo-nested"></a> koba.View with Backbone nested model and collection</h3>
+<h3 id="a-namedemo-nesteda-working-with-kobaview-and-backbone-nested-model--collection"><a name="demo-nested"></a> Working with koba.View and Backbone nested model &amp; collection</h3>
 
 <script type="text/html" id="tmpl-demo-nested">
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
@@ -280,78 +264,70 @@ myView.render().bindData();
   <p>HTML:</p>
 </blockquote>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#070;font-weight:bold">&lt;script</span> <span style="color:#b48">type</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text/html</span><span style="color:#710">'</span></span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tmpl-demo-nested</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p&gt;</span>First name: <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: firstName, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p&gt;</span>Last name: <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: lastName, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;h2&gt;</span><span style="color:#070;font-weight:bold">&lt;span</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text: firstName() + &quot; &quot; + lastName()</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/h2&gt;</span></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p</span> <span style="color:#b48">style</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#606">padding-left</span>: <span style="color:#60E">1</span><span style="color:#088">rem</span>;<span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>Address:<span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p</span> <span style="color:#b48">style</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#606">padding-left</span>: <span style="color:#60E">3</span><span style="color:#088">rem</span>;<span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: address.number, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span> <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: address.street, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p</span> <span style="color:#b48">style</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#606">padding-left</span>: <span style="color:#60E">3</span><span style="color:#088">rem</span>;<span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: address.zipCode, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span> <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: address.city, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;h2&gt;</span><span style="color:#070;font-weight:bold">&lt;span</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text: address.number() + &quot; &quot; + address.street() + &quot; &quot; + address.zipCode() + &quot; &quot; + address.city()</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/span&gt;</span><span style="color:#070;font-weight:bold">&lt;/h2&gt;</span></span>
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p</span> <span style="color:#b48">style</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#606">padding-left</span>: <span style="color:#60E">1</span><span style="color:#088">rem</span>;<span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>Phones:<span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">foreach: phones</span><span style="color:#710">&quot;</span></span><span style="color:#070;font-weight:bold">&gt;</span></span>
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">        <span style="color:#070;font-weight:bold">&lt;p</span> <span style="color:#b48">style</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#606">padding-left</span>: <span style="color:#60E">3</span><span style="color:#088">rem</span>;<span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: number, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span> <span style="color:#070;font-weight:bold">&lt;span</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text: number()</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/span&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;/div&gt;</span></span>
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span style="color:#070;font-weight:bold">&lt;/script&gt;</span>
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">content-demo-nested</span><span style="color:#710">'</span></span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">demo</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/div&gt;</span>
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/html'</span> <span class="na">id=</span><span class="s">'tmpl-demo-nested'</span><span class="nt">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">First</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: firstName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Last</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: lastName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: firstName() + " " + lastName()'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">h2&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 1rem;'</span><span class="o">&gt;</span><span class="nx">Address</span><span class="err">:</span><span class="o">&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 3rem;'</span><span class="o">&gt;&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: address.number, valueUpdate: "keyup"'</span> <span class="o">/&gt;</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: address.street, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 3rem;'</span><span class="o">&gt;&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: address.zipCode, valueUpdate: "keyup"'</span> <span class="o">/&gt;</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: address.city, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: address.number() + " " + address.street() + " " + address.zipCode() + " " + address.city()'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">span&gt;&lt;/h2&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 1rem;'</span><span class="o">&gt;</span><span class="nx">Phones</span><span class="err">:</span><span class="o">&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s2">"foreach: phones"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 3rem;'</span><span class="o">&gt;&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: number, valueUpdate: "keyup"'</span> <span class="o">/&gt;</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: number()'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">span&gt;&lt;/p&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/</span><span class="err">div&gt;</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'content-demo-nested'</span> <span class="na">class=</span><span class="s">'demo'</span><span class="nt">&gt;&lt;/div&gt;</span></code></pre></div>
 
 <blockquote>
   <p>Javascript:</p>
 </blockquote>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> Address = Backbone.Model.extend({
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">defaults</span>: {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        <span style="color:#606">number</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        <span style="color:#606">street</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>        <span style="color:#606">zipCode</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        <span style="color:#606">city</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    }
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>});
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="color:#080;font-weight:bold">var</span> Phone = Backbone.Model.extend({
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    <span style="color:#606">defaults</span>: {
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        <span style="color:#606">number</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span>    }
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>});
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span><span style="color:#080;font-weight:bold">var</span> Phones = Backbone.Collection.extend({<span style="color:#606">model</span>: Phone});
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span><span style="color:#080;font-weight:bold">var</span> Person = Backbone.Model.extend({
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    <span style="color:#606">defaults</span>: {
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>        <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>        <span style="color:#606">address</span>: <span style="color:#080;font-weight:bold">new</span> Address(),
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>        <span style="color:#606">phones</span>: <span style="color:#080;font-weight:bold">new</span> Phones()
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>    }
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>});
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span style="color:#080;font-weight:bold">var</span> person = <span style="color:#080;font-weight:bold">new</span> Person({
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">John</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>    <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Smith</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    <span style="color:#606">address</span>: <span style="color:#080;font-weight:bold">new</span> Address({
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>        <span style="color:#606">number</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">41</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span>        <span style="color:#606">street</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">rue de la République</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span>        <span style="color:#606">zipCode</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">69002</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>        <span style="color:#606">city</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Lyon</span><span style="color:#710">&quot;</span></span>
-<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    }),
-<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    <span style="color:#606">phones</span>: <span style="color:#080;font-weight:bold">new</span> Phones([
-<span class="line-numbers"><a href="#n33" name="n33">33</a></span>        {<span style="color:#606">number</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">12345678</span><span style="color:#710">&quot;</span></span>},
-<span class="line-numbers"><a href="#n34" name="n34">34</a></span>        {<span style="color:#606">number</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">87654321</span><span style="color:#710">&quot;</span></span>}
-<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    ])
-<span class="line-numbers"><a href="#n36" name="n36">36</a></span>});
-<span class="line-numbers"><a href="#n37" name="n37">37</a></span><span style="color:#080;font-weight:bold">var</span> MyView = koba.View.extend({
-<span class="line-numbers"><a href="#n38" name="n38">38</a></span>    <span style="color:#606">el</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#content-demo-nested</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n39" name="n39">39</a></span>    <span style="color:#06B;font-weight:bold">render</span>: <span style="color:#080;font-weight:bold">function</span>() {
-<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>        <span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>.html(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">&lt;div data-bind='template: {name: </span><span style="color:#b0b">\&quot;</span><span style="color:#D20">tmpl-demo-nested</span><span style="color:#b0b">\&quot;</span><span style="color:#D20">}'&gt;&lt;/div&gt;</span><span style="color:#710">&quot;</span></span>);
-<span class="line-numbers"><a href="#n41" name="n41">41</a></span>        <span style="color:#080;font-weight:bold">return</span> <span style="color:#950">this</span>;
-<span class="line-numbers"><a href="#n42" name="n42">42</a></span>    }
-<span class="line-numbers"><a href="#n43" name="n43">43</a></span>});
-<span class="line-numbers"><a href="#n44" name="n44">44</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView({<span style="color:#606">data</span>: person});
-<span class="line-numbers"><a href="#n45" name="n45">45</a></span>myView.render().bindData();
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Address</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">defaults</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">number</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">street</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">zipCode</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">city</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">Phone</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">defaults</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">number</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">Phones</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span><span class="na">model</span><span class="p">:</span> <span class="nx">Phone</span><span class="p">});</span>
+<span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">defaults</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">firstName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">lastName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">address</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Address</span><span class="p">(),</span>
+        <span class="na">phones</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Phones</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span>
+    <span class="na">firstName</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="s2">"Smith"</span><span class="p">,</span>
+    <span class="na">address</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Address</span><span class="p">({</span>
+        <span class="na">number</span><span class="p">:</span> <span class="s2">"41"</span><span class="p">,</span>
+        <span class="na">street</span><span class="p">:</span> <span class="s2">"rue de la République"</span><span class="p">,</span>
+        <span class="na">zipCode</span><span class="p">:</span> <span class="s2">"69002"</span><span class="p">,</span>
+        <span class="na">city</span><span class="p">:</span> <span class="s2">"Lyon"</span>
+    <span class="p">}),</span>
+    <span class="na">phones</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Phones</span><span class="p">([</span>
+        <span class="p">{</span><span class="na">number</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">number</span><span class="p">:</span> <span class="s2">"87654321"</span><span class="p">}</span>
+    <span class="p">])</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">MyView</span> <span class="o">=</span> <span class="nx">koba</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#content-demo-nested"</span><span class="p">,</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s2">"&lt;div data-bind='template: {name: \"tmpl-demo-nested\"}'&gt;&lt;/div&gt;"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">myView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyView</span><span class="p">({</span><span class="na">data</span><span class="p">:</span> <span class="nx">person</span><span class="p">});</span>
+<span class="nx">myView</span><span class="p">.</span><span class="nx">render</span><span class="p">().</span><span class="nx">bindData</span><span class="p">();</span></code></pre></div>
 
 <h3 id="a-namedemo-viewmodela-working-directly-with-kobaviewmodel-and-backboneview"><a name="demo-viewmodel"></a> Working directly with koba.ViewModel and Backbone.View</h3>
 
@@ -403,54 +379,46 @@ myView.render();
   <p>HTML:</p>
 </blockquote>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#070;font-weight:bold">&lt;script</span> <span style="color:#b48">type</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text/html</span><span style="color:#710">'</span></span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tmpl-demo-viewmodel</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p&gt;</span>First name: <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: firstName, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;p&gt;</span>Last name: <span style="color:#070;font-weight:bold">&lt;input</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">value: lastName, valueUpdate: &quot;keyup&quot;</span><span style="color:#710">'</span></span> <span style="color:#070;font-weight:bold">/&gt;</span><span style="color:#070;font-weight:bold">&lt;/p&gt;</span></span>
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span><span style="background-color:hsla(0,0%,0%,0.07);color:black">    <span style="color:#070;font-weight:bold">&lt;h2&gt;</span>Hello, <span style="color:#070;font-weight:bold">&lt;span</span> <span style="color:#b48">data-bind</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">text: firstName() + &quot; &quot; + lastName()</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/span&gt;</span>!<span style="color:#070;font-weight:bold">&lt;/h2&gt;</span></span>
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span><span style="color:#070;font-weight:bold">&lt;/script&gt;</span>
-<span class="line-numbers"><a href="#n6" name="n6">6</a></span><span style="color:#070;font-weight:bold">&lt;div</span> <span style="color:#b48">id</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">content-demo-viewmodel</span><span style="color:#710">'</span></span> <span style="color:#b48">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">demo</span><span style="color:#710">'</span></span><span style="color:#070;font-weight:bold">&gt;</span><span style="color:#070;font-weight:bold">&lt;/div&gt;</span>
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/html'</span> <span class="na">id=</span><span class="s">'tmpl-demo-viewmodel'</span><span class="nt">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">First</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: firstName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Last</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: lastName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: firstName() + " " + lastName()'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">span&gt;!&lt;/h2&gt;</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'content-demo-viewmodel'</span> <span class="na">class=</span><span class="s">'demo'</span><span class="nt">&gt;&lt;/div&gt;</span></code></pre></div>
 
 <blockquote>
   <p>Javascript:</p>
 </blockquote>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">var</span> Person = Backbone.Model.extend({
-<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>    <span style="color:#606">defaults</span>: {
-<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>        <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>        <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>
-<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>    }
-<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>});
-<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="color:#080;font-weight:bold">var</span> person = <span style="color:#080;font-weight:bold">new</span> Person({
-<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#606">firstName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">John</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>    <span style="color:#606">lastName</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Smith</span><span style="color:#710">&quot;</span></span>
-<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>});
-<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#080;font-weight:bold">var</span> myViewModel = <span style="color:#080;font-weight:bold">new</span> koba.ViewModel(person);
-<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span style="color:#080;font-weight:bold">var</span> MyView = Backbone.View.extend({
-<span class="line-numbers"><a href="#n13" name="n13">13</a></span>    <span style="color:#606">el</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">#content-demo-viewmodel</span><span style="color:#710">&quot;</span></span>,
-<span class="line-numbers"><a href="#n14" name="n14">14</a></span>    <span style="color:#06B;font-weight:bold">initialize</span>: <span style="color:#080;font-weight:bold">function</span>(params) {
-<span class="line-numbers"><a href="#n15" name="n15">15</a></span>        <span style="color:#950">this</span>.data = params.data;
-<span class="line-numbers"><a href="#n16" name="n16">16</a></span>    },
-<span class="line-numbers"><a href="#n17" name="n17">17</a></span>    <span style="color:#06B;font-weight:bold">render</span>: <span style="color:#080;font-weight:bold">function</span>() {
-<span class="line-numbers"><a href="#n18" name="n18">18</a></span>        <span style="color:#080;font-weight:bold">if</span> (<span style="color:#950">this</span>.viewModel) {
-<span class="line-numbers"><a href="#n19" name="n19">19</a></span>            ko.cleanNode(<span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>[<span style="color:#00D">0</span>]);
-<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>            <span style="color:#950">this</span>.viewModel.destroy();
-<span class="line-numbers"><a href="#n21" name="n21">21</a></span>        }  
-<span class="line-numbers"><a href="#n22" name="n22">22</a></span>        <span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>.html(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">&lt;div data-bind='template: {name: </span><span style="color:#b0b">\&quot;</span><span style="color:#D20">tmpl-demo-viewmodel</span><span style="color:#b0b">\&quot;</span><span style="color:#D20">}'&gt;&lt;/div&gt;</span><span style="color:#710">&quot;</span></span>);
-<span class="line-numbers"><a href="#n23" name="n23">23</a></span>        <span style="color:#950">this</span>.viewModel = <span style="color:#080;font-weight:bold">new</span> koba.ViewModel(<span style="color:#950">this</span>.data);
-<span class="line-numbers"><a href="#n24" name="n24">24</a></span>        ko.applyBindings(<span style="color:#950">this</span>.viewModel, <span style="color:#950">this</span>.<span style="color:#369;font-weight:bold">$el</span>[<span style="color:#00D">0</span>]);
-<span class="line-numbers"><a href="#n25" name="n25">25</a></span>        <span style="color:#080;font-weight:bold">return</span> <span style="color:#950">this</span>;
-<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    }
-<span class="line-numbers"><a href="#n27" name="n27">27</a></span>});
-<span class="line-numbers"><a href="#n28" name="n28">28</a></span><span style="color:#080;font-weight:bold">var</span> myView = <span style="color:#080;font-weight:bold">new</span> MyView({<span style="color:#606">data</span>: person});
-<span class="line-numbers"><a href="#n29" name="n29">29</a></span>myView.render();
-</pre></div>
-</div>
-</div>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">defaults</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">firstName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">lastName</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span>
+    <span class="na">firstName</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="s2">"Smith"</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">myViewModel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">koba</span><span class="p">.</span><span class="nx">ViewModel</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">MyView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#content-demo-viewmodel"</span><span class="p">,</span>
+    <span class="na">initialize</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">viewModel</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">ko</span><span class="p">.</span><span class="nx">cleanNode</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">viewModel</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+        <span class="p">}</span>  
+        <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s2">"&lt;div data-bind='template: {name: \"tmpl-demo-viewmodel\"}'&gt;&lt;/div&gt;"</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">viewModel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">koba</span><span class="p">.</span><span class="nx">ViewModel</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">ko</span><span class="p">.</span><span class="nx">applyBindings</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">viewModel</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">myView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyView</span><span class="p">({</span><span class="na">data</span><span class="p">:</span> <span class="nx">person</span><span class="p">});</span>
+<span class="nx">myView</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span></code></pre></div>
 
 <script type="text/javascript">
 /*<![CDATA[*/
