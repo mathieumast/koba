@@ -1,6 +1,6 @@
 koba.View = class extends Backbone.View
 
-  initialize: (params = {}) ->
+  constructor: (params = {}) ->
     super
     @data = params.data if params.data
 
@@ -13,7 +13,7 @@ koba.View = class extends Backbone.View
     @
     
   # unbind data.
-  unbindData: () ->
+  unbindData: ->
     if @viewModel
       ko.cleanNode @$el[0]
       @viewModel.destroy()
@@ -22,5 +22,6 @@ koba.View = class extends Backbone.View
   # Remove
   remove: ->
     @unbindData()
+    @data = null
     super
     @

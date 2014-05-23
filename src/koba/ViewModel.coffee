@@ -4,11 +4,14 @@ koba.ViewModel = class
     @__subscriptions = []
     _.extend @, Backbone.Events
     _.extend @, @__constructViewModel @__data
-    
-  destroy: () ->
+  
+  # destroy viewModel
+  destroy: ->
     @stopListening()
     for subscription in @__subscriptions
       subscription.dispose()
+    @__subscriptions = null
+    @__data = null
     
   __constructViewModel: (obj, parent, property) ->
     unless obj
@@ -61,3 +64,7 @@ koba.ViewModel = class
       observableArray.push viewModel.__constructViewModel model, collection, null
     viewModel.listenTo collection, "remove", (model, collection, options) ->
       observableArray.remove model
+    viewModel.listenTo collection, "destroy", (model, collection, options) ->
+      observableArray.remove model
+    viewModel.listenTo collection, "reset", (collection, options) ->
+      observableArray.removeAll()
