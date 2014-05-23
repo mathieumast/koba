@@ -4,6 +4,8 @@ url: http://mathieumast.github.io/koba/
 github: http://github.com/mathieumast/koba
 
 links:
+  - title: Documentation
+    url: documentation/
   - title: Exemples
     url: exemples/
   - title: License

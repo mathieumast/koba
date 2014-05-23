@@ -1,6 +1,6 @@
 ## Live exemples
 
-### Backbone model
+### <a name='demo-model'></a> koba.View with Backbone model
 
 <script type='text/html' id='tmpl-demo-model'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
@@ -26,11 +26,11 @@ var MyView = koba.View.extend({
     el: "#content-demo-model",
     render: function() {
         this.$el.html("<div data-bind='template: {name: \"tmpl-demo-model\"}'></div>");
-        myView.bindData();
+        return this;
     }
 });
 var myView = new MyView({data: person});
-myView.render();
+myView.render().bindData();
 };
 /*]]>*/
 </script>
@@ -63,14 +63,14 @@ var MyView = koba.View.extend({
     el: "#content-demo-model",
     render: function() {
         this.$el.html("<div id='my-view' data-bind='template: {name: \"tmpl-demo-model\"}'></div>");
-        myView.bindData();
+        return this;
     }
 });
 var myView = new MyView({data: person});
-myView.render();
+myView.render().bindData();
 ~~~
 
-### Backbone model & collection
+### <a name='demo-collection'></a> koba.View with Backbone model & collection
 
 <script type='text/html' id='tmpl-demo-collection'>
     <div data-bind="foreach: todos">
@@ -100,7 +100,7 @@ var MyView = koba.View.extend({
     el: "#content-demo-collection",
     render: function() {
         this.$el.html("<div data-bind='template: {name: \"tmpl-demo-collection\"}'></div>");
-        myView.bindData();
+        return this;
     },
     add: function(e) {
         e.preventDefault()
@@ -109,7 +109,7 @@ var MyView = koba.View.extend({
     }
 });
 var myView = new MyView({data: data});
-myView.render();
+myView.render().bindData();
 };
 /*]]>*/
 </script>
@@ -146,7 +146,7 @@ var MyView = koba.View.extend({
     el: "#content-demo-collection",
     render: function() {
         this.$el.html("<div data-bind='template: {name: \"tmpl-demo-collection\"}'></div>");
-        myView.bindData();
+        return this;
     },
     add: function(e) {
         e.preventDefault()
@@ -155,10 +155,10 @@ var MyView = koba.View.extend({
     }
 });
 var myView = new MyView({data: data});
-myView.render();
+myView.render().bindData();
 ~~~
 
-### Backbone nested model and collection
+### <a name='demo-nested'></a> koba.View with Backbone nested model and collection
 
 <script type='text/html' id='tmpl-demo-nested'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
@@ -218,11 +218,11 @@ var MyView = koba.View.extend({
     el: "#content-demo-nested",
     render: function() {
         this.$el.html("<div data-bind='template: {name: \"tmpl-demo-nested\"}'></div>");
-        myView.bindData();
+        return this;
     }
 });
 var myView = new MyView({data: person});
-myView.render();
+myView.render().bindData();
 };
 /*]]>*/
 </script>
@@ -289,12 +289,105 @@ var MyView = koba.View.extend({
     el: "#content-demo-nested",
     render: function() {
         this.$el.html("<div data-bind='template: {name: \"tmpl-demo-nested\"}'></div>");
-        myView.bindData();
+        return this;
+    }
+});
+var myView = new MyView({data: person});
+myView.render().bindData();
+~~~
+
+### <a name="demo-viewmodel"></a> Working directly with koba.ViewModel and Backbone.View
+
+<script type='text/html' id='tmpl-demo-viewmodel'>
+    <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
+    <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
+    <h2>Hello, <span data-bind='text: firstName() + " " + lastName()'></span>!</h2>
+</script>
+<div id='content-demo-viewmodel' class='demo'></div>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+function demoViewModel() {
+var Person = Backbone.Model.extend({
+    defaults: {
+        firstName: "",
+        lastName: ""
+    }
+});
+var person = new Person({
+    firstName: "John",
+    lastName: "Smith"
+});
+var myViewModel = new koba.ViewModel(person);
+var MyView = Backbone.View.extend({
+    el: "#content-demo-viewmodel",
+    initialize: function(params) {
+        this.data = params.data;
+    },
+    render: function() {
+        if (this.viewModel) {
+            ko.cleanNode(this.$el[0]);
+            this.viewModel.destroy();
+        }  
+        this.$el.html("<div data-bind='template: {name: \"tmpl-demo-viewmodel\"}'></div>");
+        this.viewModel = new koba.ViewModel(this.data);
+        ko.applyBindings(this.viewModel, this.$el[0]);
+        return this;
+    }
+});
+var myView = new MyView({data: person});
+myView.render();
+};
+/*]]>*/
+</script>
+
+  > HTML:
+
+~~~ html
+<script type='text/html' id='tmpl-demo-viewmodel'>
+    <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
+    <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
+    <h2>Hello, <span data-bind='text: firstName() + " " + lastName()'></span>!</h2>
+</script>
+<div id='content-demo-viewmodel' class='demo'></div>
+~~~
+
+  > Javascript:
+
+~~~ javascript
+var Person = Backbone.Model.extend({
+    defaults: {
+        firstName: "",
+        lastName: ""
+    }
+});
+var person = new Person({
+    firstName: "John",
+    lastName: "Smith"
+});
+var myViewModel = new koba.ViewModel(person);
+var MyView = Backbone.View.extend({
+    el: "#content-demo-viewmodel",
+    initialize: function(params) {
+        this.data = params.data;
+    },
+    render: function() {
+        if (this.viewModel) {
+            ko.cleanNode(this.$el[0]);
+            this.viewModel.destroy();
+        }  
+        this.$el.html("<div data-bind='template: {name: \"tmpl-demo-viewmodel\"}'></div>");
+        this.viewModel = new koba.ViewModel(this.data);
+        ko.applyBindings(this.viewModel, this.$el[0]);
+        return this;
     }
 });
 var myView = new MyView({data: person});
 myView.render();
 ~~~
+
+
+
 
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -302,6 +395,7 @@ window.onload = function() {
     demoModel();
     demoCollection();
     demoNested();
+    demoViewModel();
 }
 /*]]>*/
 </script>

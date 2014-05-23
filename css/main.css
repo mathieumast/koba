@@ -14,10 +14,9 @@ a:hover, a:focus {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: sans-serif;
-    margin: 0 0 0.5rem -0.1rem /* align left edge */;
+    margin: 0;
     line-height: 1;
     color: #111;
-    text-rendering: optimizeLegibility;
 }
 
 h1 {
@@ -35,10 +34,27 @@ h2 {
     margin-bottom: 0.75rem;
 }
 
-h3, h4, h5, h6 {
+h3 {
     margin-top: 1.5rem;
-    font-size: 1rem;
-    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+
+h4 {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+h5 {
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+    font-size: 0.8rem;
+}
+
+h6 {
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+    font-size: 0.7rem;
 }
 
 blockquote {
@@ -104,7 +120,6 @@ code {
     padding: 15px 25px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
-    text-transform: uppercase;
     font-size: 14px;
     position: relative;
     -webkit-transition: color .25s;
