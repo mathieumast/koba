@@ -5,7 +5,7 @@
 <script type='text/html' id='tmpl-demo-model'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: "Hello, " + firstName() + " " + lastName() + "!"'></h2>
+    <h2 data-bind='text: fullname'></h2>
 </script>
 <div id='content-demo-model' class='demo'></div>
 
@@ -20,7 +20,10 @@ var Person = Backbone.Model.extend({
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith"
+    lastName: "Smith",
+    fullname: function() { 
+        return this.firstName() + " " + this.lastName();
+    }
 });
 var MyView = koba.View.extend({
     el: "#content-demo-model",
@@ -41,7 +44,7 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-model'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: "Hello, " + firstName() + " " + lastName() + "!"'></h2>
+    <h2 data-bind='text: fullname'></h2>
 </script>
 <div id='content-demo-model' class='demo'></div>
 {% endhighlight %}
@@ -57,12 +60,15 @@ var Person = Backbone.Model.extend({
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith"
+    lastName: "Smith",
+    fullname: function() { 
+        return this.firstName() + " " + this.lastName();
+    }
 });
 var MyView = koba.View.extend({
     el: "#content-demo-model",
     render: function() {
-        this.$el.html("<div id='my-view' data-bind='template: {name: \"tmpl-demo-model\"}'></div>");
+        this.$el.html("<div data-bind='template: {name: \"tmpl-demo-model\"}'></div>");
         return this;
     }
 });
@@ -301,7 +307,7 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-viewmodel'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2>Hello, <span data-bind='text: firstName() + " " + lastName()'></span>!</h2>
+    <h2 data-bind='text: fullname'></h2>
 </script>
 <div id='content-demo-viewmodel' class='demo'></div>
 
@@ -316,7 +322,10 @@ var Person = Backbone.Model.extend({
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith"
+    lastName: "Smith",
+    fullname: function() { 
+        return this.firstName() + " " + this.lastName();
+    }
 });
 var myViewModel = new koba.ViewModel(person);
 var MyView = Backbone.View.extend({
@@ -347,7 +356,7 @@ myView.render();
 <script type='text/html' id='tmpl-demo-viewmodel'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2>Hello, <span data-bind='text: firstName() + " " + lastName()'></span>!</h2>
+    <h2 data-bind='text: fullname'></h2>
 </script>
 <div id='content-demo-viewmodel' class='demo'></div>
 {% endhighlight %}
@@ -363,7 +372,10 @@ var Person = Backbone.Model.extend({
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith"
+    lastName: "Smith",
+    fullname: function() { 
+        return this.firstName() + " " + this.lastName();
+    }
 });
 var myViewModel = new koba.ViewModel(person);
 var MyView = Backbone.View.extend({
