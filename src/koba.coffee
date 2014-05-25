@@ -1,5 +1,5 @@
 ###
-Koba 1.0.2
+Koba 1.0.3
 Bridge between Knockout and Backbone.
 Copyright (c) 2014, Mathieu MAST https://github.com/mathieumast/koba
 Licensed under the MIT license
