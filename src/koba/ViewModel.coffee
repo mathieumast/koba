@@ -13,34 +13,37 @@ koba.ViewModel = class
     @__subscriptions = null
     @__data = null
     
-  __constructViewModel: (obj, parent, property) ->
+  __constructViewModel: (obj, parentObserved, parentModel, property) ->
     unless obj
-      res = observe property, null, parent, @
-    else if obj.attributes
+      res = observe property, null, parentModel, @
+    else if obj.attributes and obj.set and obj.on
       res = {}
-      for elem, value of obj.attributes
-        res[elem] = @__constructViewModel value, obj, elem
-    else if obj.models
+      for attr, value of obj.attributes
+        res[attr] = @__constructViewModel value, res, obj, attr
+    else if obj.models and obj.on
       tbl = []
       for value in obj.models
-        tbl.push @__constructViewModel value, obj, null
+        tbl.push @__constructViewModel value, null, obj, null
       res = observeArray tbl, obj, @
+    else if _.isFunction obj
+      if parentObserved
+        res = compute obj, parentObserved
     else if _.isArray obj
       tbl = []
       for value in obj
-        tbl.push @__constructViewModel value, obj, null
+        tbl.push @__constructViewModel value, null, obj, null
       res = observeArray tbl, null, @
     else if _.isObject obj
       res = {}
-      for elem, value of obj
-        res[elem] = @__constructViewModel value, obj, elem
+      for attr, value of obj
+        res[attr] = @__constructViewModel value, obj, attr
     else
-      res = observe property, obj, parent, @
+      res = observe property, obj, parentModel, @
     res
     
   observe = (property, value, model, viewModel) ->
     observable = ko.observable value
-    if model and property
+    if model.attributes and model.set and model.on and property
       listenTo viewModel, model, observable, property
       subscribe viewModel, model, observable, property
     observable
@@ -68,3 +71,7 @@ koba.ViewModel = class
       observableArray.remove model
     viewModel.listenTo collection, "reset", (collection, options) ->
       observableArray.removeAll()
+
+  compute = (fnct, context) ->
+    ko.computed fnct, context
+    

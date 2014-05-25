@@ -73,7 +73,7 @@ Licensed under the MIT license
   })(Backbone.View);
 
   koba.ViewModel = (function() {
-    var listenCollectionTo, listenTo, observe, observeArray, subscribe;
+    var compute, listenCollectionTo, listenTo, observe, observeArray, subscribe;
 
     function _Class(__data) {
       this.__data = __data;
@@ -94,40 +94,44 @@ Licensed under the MIT license
       return this.__data = null;
     };
 
-    _Class.prototype.__constructViewModel = function(obj, parent, property) {
-      var elem, res, tbl, value, _i, _j, _len, _len1, _ref, _ref1;
+    _Class.prototype.__constructViewModel = function(obj, parentObserved, parentModel, property) {
+      var attr, res, tbl, value, _i, _j, _len, _len1, _ref, _ref1;
       if (!obj) {
-        res = observe(property, null, parent, this);
-      } else if (obj.attributes) {
+        res = observe(property, null, parentModel, this);
+      } else if (obj.attributes && obj.set && obj.on) {
         res = {};
         _ref = obj.attributes;
-        for (elem in _ref) {
-          value = _ref[elem];
-          res[elem] = this.__constructViewModel(value, obj, elem);
+        for (attr in _ref) {
+          value = _ref[attr];
+          res[attr] = this.__constructViewModel(value, res, obj, attr);
         }
-      } else if (obj.models) {
+      } else if (obj.models && obj.on) {
         tbl = [];
         _ref1 = obj.models;
         for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
           value = _ref1[_i];
-          tbl.push(this.__constructViewModel(value, obj, null));
+          tbl.push(this.__constructViewModel(value, null, obj, null));
         }
         res = observeArray(tbl, obj, this);
+      } else if (_.isFunction(obj)) {
+        if (parentObserved) {
+          res = compute(obj, parentObserved);
+        }
       } else if (_.isArray(obj)) {
         tbl = [];
         for (_j = 0, _len1 = obj.length; _j < _len1; _j++) {
           value = obj[_j];
-          tbl.push(this.__constructViewModel(value, obj, null));
+          tbl.push(this.__constructViewModel(value, null, obj, null));
         }
         res = observeArray(tbl, null, this);
       } else if (_.isObject(obj)) {
         res = {};
-        for (elem in obj) {
-          value = obj[elem];
-          res[elem] = this.__constructViewModel(value, obj, elem);
+        for (attr in obj) {
+          value = obj[attr];
+          res[attr] = this.__constructViewModel(value, obj, attr);
         }
       } else {
-        res = observe(property, obj, parent, this);
+        res = observe(property, obj, parentModel, this);
       }
       return res;
     };
@@ -135,7 +139,7 @@ Licensed under the MIT license
     observe = function(property, value, model, viewModel) {
       var observable;
       observable = ko.observable(value);
-      if (model && property) {
+      if (model.attributes && model.set && model.on && property) {
         listenTo(viewModel, model, observable, property);
         subscribe(viewModel, model, observable, property);
       }
@@ -176,6 +180,10 @@ Licensed under the MIT license
       return viewModel.listenTo(collection, "reset", function(collection, options) {
         return observableArray.removeAll();
       });
+    };
+
+    compute = function(fnct, context) {
+      return ko.computed(fnct, context);
     };
 
     return _Class;
