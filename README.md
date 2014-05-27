@@ -29,10 +29,10 @@ Documentation for Koba is availlable online at the [Koba site](http://mathieumas
 
 Koba has the following dependencies:
 
-* [Knouckout](http://knockoutjs.com/) (>= 3.0.0)
+* [Knouckout](http://knockoutjs.com/) (>= 3.1.0)
 
-* [Backbone](http://backbonejs.org/) (>= 1.0.0)
+* [Backbone](http://backbonejs.org/) (>= 1.1.0)
 
 * [Underscore.js](http://underscorejs.org/) (>= 1.5.0)
 
-* [jQuery.js](http://jquery.com/)
+* [jQuery.js](http://jquery.com/) or [Zepto](http://zeptojs.com/)

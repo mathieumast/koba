@@ -1,10 +1,12 @@
 {
-    "name": "koba",
+    "name": "Koba",
+    "description": "Koba, bridge between Knockout and Backbone",
     "main": "dist/koba.js",
     "license": "MIT",
     "version": "1.0.3",
     "dependencies": {
-        "backbone": ">=1.1.2",
+        "backbone": ">=1.1.0",
+        "underscore": ">=1.5.0",
         "knockout": ">=3.1.0"
     }
 }
