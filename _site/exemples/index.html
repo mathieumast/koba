@@ -35,7 +35,7 @@
 <script type="text/html" id="tmpl-demo-model">
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullname'></h2>
+    <h2 data-bind='text: fullName'></h2>
 </script>
 
 <div id="content-demo-model" class="demo"></div>
@@ -46,15 +46,15 @@ function demoModel() {
 var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
-        lastName: ""
+        lastName: "",
+        fullName: function() { 
+            return this.get("firstName") + " " + this.get("lastName");
+        }
     }
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith",
-    fullname: function() { 
-        return this.firstName() + " " + this.lastName();
-    }
+    lastName: "Smith"
 });
 var MyView = koba.View.extend({
     el: "#content-demo-model",
@@ -76,7 +76,7 @@ myView.render().bindData();
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/html'</span> <span class="na">id=</span><span class="s">'tmpl-demo-model'</span><span class="nt">&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">First</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: firstName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Last</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: lastName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
-    <span class="o">&lt;</span><span class="nx">h2</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: fullname'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">h2&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h2</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: fullName'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">h2&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'content-demo-model'</span> <span class="na">class=</span><span class="s">'demo'</span><span class="nt">&gt;&lt;/div&gt;</span></code></pre></div>
 
@@ -87,15 +87,15 @@ myView.render().bindData();
 <div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
     <span class="na">defaults</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">firstName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-        <span class="na">lastName</span><span class="p">:</span> <span class="s2">""</span>
+        <span class="na">lastName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">fullName</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"firstName"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"lastName"</span><span class="p">);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
 <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span>
     <span class="na">firstName</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
-    <span class="na">lastName</span><span class="p">:</span> <span class="s2">"Smith"</span><span class="p">,</span>
-    <span class="na">fullname</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">();</span>
-    <span class="p">}</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="s2">"Smith"</span>
 <span class="p">});</span>
 <span class="kd">var</span> <span class="nx">MyView</span> <span class="o">=</span> <span class="nx">koba</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
     <span class="na">el</span><span class="p">:</span> <span class="s2">"#content-demo-model"</span><span class="p">,</span>
@@ -201,11 +201,11 @@ myView.render().bindData();
 <script type="text/html" id="tmpl-demo-nested">
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2><span data-bind='text: firstName() + " " + lastName()'></h2>
+    <h2 data-bind='text: fullName'></h2>
     <p style='padding-left: 1rem;'>Address:</p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.number, valueUpdate: "keyup"' /> <input data-bind='value: address.street, valueUpdate: "keyup"' /></p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.zipCode, valueUpdate: "keyup"' /> <input data-bind='value: address.city, valueUpdate: "keyup"' /></p>
-    <h2><span data-bind='text: address.number() + " " + address.street() + " " + address.zipCode() + " " + address.city()'></span></h2>
+    <h2 data-bind='text: address.fullAddress'></h2>
     <p style='padding-left: 1rem;'>Phones:</p>
     <div data-bind="foreach: phones">
         <p style='padding-left: 3rem;'><input data-bind='value: number, valueUpdate: "keyup"' /> <span data-bind='text: number()'></span></p>
@@ -222,7 +222,10 @@ var Address = Backbone.Model.extend({
         number: "",
         street: "",
         zipCode: "",
-        city: ""
+        city: "",
+        fullAddress: function() { 
+            return this.get("number") + " " + this.get("street") + " " + this.get("zipCode") + " " + this.get("city");
+        }
     }
 });
 var Phone = Backbone.Model.extend({
@@ -235,6 +238,9 @@ var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
         lastName: "",
+        fullName: function() { 
+            return this.get("firstName") + " " + this.get("lastName");
+        },
         address: new Address(),
         phones: new Phones()
     }
@@ -273,11 +279,11 @@ myView.render().bindData();
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/html'</span> <span class="na">id=</span><span class="s">'tmpl-demo-nested'</span><span class="nt">&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">First</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: firstName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Last</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: lastName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
-    <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: firstName() + " " + lastName()'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">h2&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h2</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: fullName'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">h2&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 1rem;'</span><span class="o">&gt;</span><span class="nx">Address</span><span class="err">:</span><span class="o">&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 3rem;'</span><span class="o">&gt;&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: address.number, valueUpdate: "keyup"'</span> <span class="o">/&gt;</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: address.street, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 3rem;'</span><span class="o">&gt;&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: address.zipCode, valueUpdate: "keyup"'</span> <span class="o">/&gt;</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: address.city, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
-    <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: address.number() + " " + address.street() + " " + address.zipCode() + " " + address.city()'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">span&gt;&lt;/h2&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h2</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: address.fullAddress'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">h2&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 1rem;'</span><span class="o">&gt;</span><span class="nx">Phones</span><span class="err">:</span><span class="o">&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
     <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s2">"foreach: phones"</span><span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s1">'padding-left: 3rem;'</span><span class="o">&gt;&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: number, valueUpdate: "keyup"'</span> <span class="o">/&gt;</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: number()'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">span&gt;&lt;/p&gt;</span>
@@ -294,7 +300,10 @@ myView.render().bindData();
         <span class="na">number</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="na">street</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="na">zipCode</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-        <span class="na">city</span><span class="p">:</span> <span class="s2">""</span>
+        <span class="na">city</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">fullAddress</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"number"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"street"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"zipCode"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"city"</span><span class="p">);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
 <span class="kd">var</span> <span class="nx">Phone</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
@@ -307,6 +316,9 @@ myView.render().bindData();
     <span class="na">defaults</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">firstName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="na">lastName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">fullName</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"firstName"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"lastName"</span><span class="p">);</span>
+        <span class="p">},</span>
         <span class="na">address</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Address</span><span class="p">(),</span>
         <span class="na">phones</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Phones</span><span class="p">()</span>
     <span class="p">}</span>
@@ -340,7 +352,7 @@ myView.render().bindData();
 <script type="text/html" id="tmpl-demo-viewmodel">
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullname'></h2>
+    <h2 data-bind='text: fullName'></h2>
 </script>
 
 <div id="content-demo-viewmodel" class="demo"></div>
@@ -351,15 +363,15 @@ function demoViewModel() {
 var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
-        lastName: ""
+        lastName: "",
+        fullName: function() { 
+            return this.get("firstName") + " " + this.get("lastName");
+        }
     }
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith",
-    fullname: function() { 
-        return this.firstName() + " " + this.lastName();
-    }
+    lastName: "Smith"
 });
 var myViewModel = new koba.ViewModel(person);
 var MyView = Backbone.View.extend({
@@ -391,7 +403,7 @@ myView.render();
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/html'</span> <span class="na">id=</span><span class="s">'tmpl-demo-viewmodel'</span><span class="nt">&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">First</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: firstName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Last</span> <span class="nx">name</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'value: lastName, valueUpdate: "keyup"'</span> <span class="o">/&gt;&lt;</span><span class="sr">/</span><span class="err">p&gt;</span>
-    <span class="o">&lt;</span><span class="nx">h2</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: fullname'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">h2&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h2</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bind</span><span class="o">=</span><span class="s1">'text: fullName'</span><span class="o">&gt;&lt;</span><span class="sr">/</span><span class="err">h2&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'content-demo-viewmodel'</span> <span class="na">class=</span><span class="s">'demo'</span><span class="nt">&gt;&lt;/div&gt;</span></code></pre></div>
 
@@ -402,15 +414,15 @@ myView.render();
 <div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
     <span class="na">defaults</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">firstName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-        <span class="na">lastName</span><span class="p">:</span> <span class="s2">""</span>
+        <span class="na">lastName</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="na">fullName</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"firstName"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"lastName"</span><span class="p">);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
 <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span>
     <span class="na">firstName</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
-    <span class="na">lastName</span><span class="p">:</span> <span class="s2">"Smith"</span><span class="p">,</span>
-    <span class="na">fullname</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">();</span>
-    <span class="p">}</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="s2">"Smith"</span>
 <span class="p">});</span>
 <span class="kd">var</span> <span class="nx">myViewModel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">koba</span><span class="p">.</span><span class="nx">ViewModel</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">MyView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>

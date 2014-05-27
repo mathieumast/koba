@@ -73,13 +73,13 @@ Licensed under the MIT license
   })(Backbone.View);
 
   koba.ViewModel = (function() {
-    var compute, listenCollectionTo, listenTo, observe, observeArray, subscribe;
+    var fnctCall, listenCollectionTo, listenFunctionTo, listenTo, observe, observeArray, observeFunction, subscribe;
 
     function _Class(__data) {
       this.__data = __data;
       this.__subscriptions = [];
       _.extend(this, Backbone.Events);
-      _.extend(this, this.__constructViewModel(this.__data));
+      _.extend(this, this.__constructViewModel(this.__data, null, null));
     }
 
     _Class.prototype.destroy = function() {
@@ -94,44 +94,42 @@ Licensed under the MIT license
       return this.__data = null;
     };
 
-    _Class.prototype.__constructViewModel = function(obj, parentObserved, parentModel, property) {
+    _Class.prototype.__constructViewModel = function(obj, parentBackboneModel, property) {
       var attr, res, tbl, value, _i, _j, _len, _len1, _ref, _ref1;
       if (!obj) {
-        res = observe(property, null, parentModel, this);
+        res = observe(property, null, parentBackboneModel, this);
       } else if (obj.attributes && obj.set && obj.on) {
         res = {};
         _ref = obj.attributes;
         for (attr in _ref) {
           value = _ref[attr];
-          res[attr] = this.__constructViewModel(value, res, obj, attr);
+          res[attr] = this.__constructViewModel(value, obj, attr);
         }
       } else if (obj.models && obj.on) {
         tbl = [];
         _ref1 = obj.models;
         for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
           value = _ref1[_i];
-          tbl.push(this.__constructViewModel(value, null, obj, null));
+          tbl.push(this.__constructViewModel(value, parentBackboneModel, null));
         }
         res = observeArray(tbl, obj, this);
       } else if (_.isFunction(obj)) {
-        if (parentObserved) {
-          res = compute(obj, parentObserved);
-        }
+        res = observeFunction(obj, parentBackboneModel, this);
       } else if (_.isArray(obj)) {
         tbl = [];
         for (_j = 0, _len1 = obj.length; _j < _len1; _j++) {
           value = obj[_j];
-          tbl.push(this.__constructViewModel(value, null, obj, null));
+          tbl.push(this.__constructViewModel(value, parentBackboneModel, null));
         }
         res = observeArray(tbl, null, this);
       } else if (_.isObject(obj)) {
         res = {};
         for (attr in obj) {
           value = obj[attr];
-          res[attr] = this.__constructViewModel(value, obj, attr);
+          res[attr] = this.__constructViewModel(value, parentBackboneModel, attr);
         }
       } else {
-        res = observe(property, obj, parentModel, this);
+        res = observe(property, obj, parentBackboneModel, this);
       }
       return res;
     };
@@ -139,7 +137,7 @@ Licensed under the MIT license
     observe = function(property, value, model, viewModel) {
       var observable;
       observable = ko.observable(value);
-      if (model.attributes && model.set && model.on && property) {
+      if (model && model.attributes && model.set && model.on && property) {
         listenTo(viewModel, model, observable, property);
         subscribe(viewModel, model, observable, property);
       }
@@ -182,8 +180,34 @@ Licensed under the MIT license
       });
     };
 
-    compute = function(fnct, context) {
-      return ko.computed(fnct, context);
+    observeFunction = function(fnct, model, viewModel) {
+      var newVal, observable;
+      newVal = fnctCall(fnct, model);
+      observable = ko.observable(newVal);
+      observable.__latestValue = newVal;
+      if (model && model.attributes && model.set && model.on) {
+        listenFunctionTo(viewModel, model, observable, fnct);
+      }
+      return observable;
+    };
+
+    listenFunctionTo = function(viewModel, model, observable, fnct) {
+      return viewModel.listenTo(model, "change", function(model, value, options) {
+        var newVal;
+        newVal = fnctCall(fnct, model);
+        if (newVal !== observable.__latestValue) {
+          observable(fnctCall(fnct, model));
+          return observable.__latestValue = newVal;
+        }
+      });
+    };
+
+    fnctCall = function(fnct, model) {
+      try {
+        return fnct.call(model);
+      } finally {
+        null;
+      }
     };
 
     return _Class;

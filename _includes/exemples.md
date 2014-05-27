@@ -5,7 +5,7 @@
 <script type='text/html' id='tmpl-demo-model'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullname'></h2>
+    <h2 data-bind='text: fullName'></h2>
 </script>
 <div id='content-demo-model' class='demo'></div>
 
@@ -15,15 +15,15 @@ function demoModel() {
 var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
-        lastName: ""
+        lastName: "",
+        fullName: function() { 
+            return this.get("firstName") + " " + this.get("lastName");
+        }
     }
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith",
-    fullname: function() { 
-        return this.firstName() + " " + this.lastName();
-    }
+    lastName: "Smith"
 });
 var MyView = koba.View.extend({
     el: "#content-demo-model",
@@ -44,7 +44,7 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-model'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullname'></h2>
+    <h2 data-bind='text: fullName'></h2>
 </script>
 <div id='content-demo-model' class='demo'></div>
 {% endhighlight %}
@@ -55,15 +55,15 @@ myView.render().bindData();
 var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
-        lastName: ""
+        lastName: "",
+        fullName: function() { 
+            return this.get("firstName") + " " + this.get("lastName");
+        }
     }
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith",
-    fullname: function() { 
-        return this.firstName() + " " + this.lastName();
-    }
+    lastName: "Smith"
 });
 var MyView = koba.View.extend({
     el: "#content-demo-model",
@@ -169,11 +169,11 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-nested'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2><span data-bind='text: firstName() + " " + lastName()'></h2>
+    <h2 data-bind='text: fullName'></h2>
     <p style='padding-left: 1rem;'>Address:</p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.number, valueUpdate: "keyup"' /> <input data-bind='value: address.street, valueUpdate: "keyup"' /></p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.zipCode, valueUpdate: "keyup"' /> <input data-bind='value: address.city, valueUpdate: "keyup"' /></p>
-    <h2><span data-bind='text: address.number() + " " + address.street() + " " + address.zipCode() + " " + address.city()'></span></h2>
+    <h2 data-bind='text: address.fullAddress'></h2>
     <p style='padding-left: 1rem;'>Phones:</p>
     <div data-bind="foreach: phones">
         <p style='padding-left: 3rem;'><input data-bind='value: number, valueUpdate: "keyup"' /> <span data-bind='text: number()'></span></p>
@@ -189,7 +189,10 @@ var Address = Backbone.Model.extend({
         number: "",
         street: "",
         zipCode: "",
-        city: ""
+        city: "",
+        fullAddress: function() { 
+            return this.get("number") + " " + this.get("street") + " " + this.get("zipCode") + " " + this.get("city");
+        }
     }
 });
 var Phone = Backbone.Model.extend({
@@ -202,6 +205,9 @@ var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
         lastName: "",
+        fullName: function() { 
+            return this.get("firstName") + " " + this.get("lastName");
+        },
         address: new Address(),
         phones: new Phones()
     }
@@ -239,11 +245,11 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-nested'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2><span data-bind='text: firstName() + " " + lastName()'></h2>
+    <h2 data-bind='text: fullName'></h2>
     <p style='padding-left: 1rem;'>Address:</p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.number, valueUpdate: "keyup"' /> <input data-bind='value: address.street, valueUpdate: "keyup"' /></p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.zipCode, valueUpdate: "keyup"' /> <input data-bind='value: address.city, valueUpdate: "keyup"' /></p>
-    <h2><span data-bind='text: address.number() + " " + address.street() + " " + address.zipCode() + " " + address.city()'></span></h2>
+    <h2 data-bind='text: address.fullAddress'></h2>
     <p style='padding-left: 1rem;'>Phones:</p>
     <div data-bind="foreach: phones">
         <p style='padding-left: 3rem;'><input data-bind='value: number, valueUpdate: "keyup"' /> <span data-bind='text: number()'></span></p>
@@ -260,7 +266,10 @@ var Address = Backbone.Model.extend({
         number: "",
         street: "",
         zipCode: "",
-        city: ""
+        city: "",
+        fullAddress: function() { 
+            return this.get("number") + " " + this.get("street") + " " + this.get("zipCode") + " " + this.get("city");
+        }
     }
 });
 var Phone = Backbone.Model.extend({
@@ -273,6 +282,9 @@ var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
         lastName: "",
+        fullName: function() { 
+            return this.get("firstName") + " " + this.get("lastName");
+        },
         address: new Address(),
         phones: new Phones()
     }
@@ -307,7 +319,7 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-viewmodel'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullname'></h2>
+    <h2 data-bind='text: fullName'></h2>
 </script>
 <div id='content-demo-viewmodel' class='demo'></div>
 
@@ -317,15 +329,15 @@ function demoViewModel() {
 var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
-        lastName: ""
+        lastName: "",
+        fullName: function() { 
+            return this.get("firstName") + " " + this.get("lastName");
+        }
     }
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith",
-    fullname: function() { 
-        return this.firstName() + " " + this.lastName();
-    }
+    lastName: "Smith"
 });
 var myViewModel = new koba.ViewModel(person);
 var MyView = Backbone.View.extend({
@@ -356,7 +368,7 @@ myView.render();
 <script type='text/html' id='tmpl-demo-viewmodel'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullname'></h2>
+    <h2 data-bind='text: fullName'></h2>
 </script>
 <div id='content-demo-viewmodel' class='demo'></div>
 {% endhighlight %}
@@ -367,15 +379,15 @@ myView.render();
 var Person = Backbone.Model.extend({
     defaults: {
         firstName: "",
-        lastName: ""
+        lastName: "",
+        fullName: function() { 
+            return this.get("firstName") + " " + this.get("lastName");
+        }
     }
 });
 var person = new Person({
     firstName: "John",
-    lastName: "Smith",
-    fullname: function() { 
-        return this.firstName() + " " + this.lastName();
-    }
+    lastName: "Smith"
 });
 var myViewModel = new koba.ViewModel(person);
 var MyView = Backbone.View.extend({
