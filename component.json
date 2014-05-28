@@ -1,0 +1,13 @@
+{
+    "name": "Koba",
+    "description": "Koba, the bridge between Knockout and Backbone",
+    "keywords": ["knockout", "backbone", "data-binding", "binding", "two", "way"],
+    "main": "dist/koba.js",
+    "license": "MIT",
+    "version": "1.0.3",
+    "repo": "mathieumast/koba",
+    "dependencies": {
+        "jashkenas/backbone": "*",
+        "matchdav/knockout": "*"
+    }
+}
