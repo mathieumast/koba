@@ -1,6 +1,6 @@
 {
     "name": "Koba",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Koba, the bridge between Knockout and Backbone",
     "homepage": "https://github.com/mathieumast/koba",
     "keywords": ["knockout", "backbone", "data-binding", "binding", "two", "way"],
