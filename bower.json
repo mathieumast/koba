@@ -1,12 +1,14 @@
 {
     "name": "Koba",
+    "version": "1.0.3",
     "description": "Koba, the bridge between Knockout and Backbone",
+    "homepage": "https://github.com/mathieumast/koba",
+    "keywords": ["knockout", "backbone", "data-binding", "binding", "two", "way"],
     "main": "dist/koba.js",
     "license": "MIT",
-    "version": "1.0.3",
     "repository": {
         "type": "git",
-        "url": "https://github.com/mathieumast/koba.git"
+        "url": "git://github.com/mathieumast/koba.git"
     },
     "dependencies": {
         "backbone": ">=1.1.0",
