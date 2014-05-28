@@ -7,9 +7,9 @@ Documentation for Koba is availlable online at the [Koba site](http://mathieumas
 
 ## Download
 
-* [koba.min.js (minified)](http://mathieumast.github.io/koba//js/koba.min.js)
+* [koba.min.js (minified)](http://mathieumast.github.io/koba/js/koba.min.js)
 
-* [koba.js](http://mathieumast.github.io/koba//js/koba.js)
+* [koba.js](http://mathieumast.github.io/koba/js/koba.js)
 
 ## Features
 
