@@ -5,7 +5,7 @@
 <script type='text/html' id='tmpl-demo-model'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullName'></h2>
+    <p><strong data-bind='text: fullName'></strong></p>
 </script>
 <div id='content-demo-model' class='demo'></div>
 
@@ -44,7 +44,7 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-model'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullName'></h2>
+    <p><strong data-bind='text: fullName'></strong></p>
 </script>
 <div id='content-demo-model' class='demo'></div>
 {% endhighlight %}
@@ -80,7 +80,7 @@ myView.render().bindData();
 
 <script type='text/html' id='tmpl-demo-collection'>
     <div data-bind="foreach: todos">
-        <p><input data-bind='value: val, valueUpdate: "keyup"' /> <span data-bind='text: val()'></span></p>
+        <p><input data-bind='value: val, valueUpdate: "keyup"' /> <strong data-bind='text: val()'></strong></p>
     </div>
     <div>
         <form><input data-bind='value: todo.val' /> <button id='add' type='submit'>Add</button></form>
@@ -125,7 +125,7 @@ myView.render().bindData();
 {% highlight html %}
 <script type='text/html' id='tmpl-demo-collection'>
     <div data-bind="foreach: todos">
-        <p><input data-bind='value: val, valueUpdate: "keyup"' /> <span data-bind='text: val()'></span></p>
+        <p><input data-bind='value: val, valueUpdate: "keyup"' /> <strong data-bind='text: val()'></strong></p>
     </div>
     <div>
         <form><input data-bind='value: todo.val' /> <button id='add' type='submit'>Add</button></form>
@@ -169,14 +169,14 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-nested'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullName'></h2>
+    <p><strong data-bind='text: fullName'></strong></p>
     <p style='padding-left: 1rem;'>Address:</p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.number, valueUpdate: "keyup"' /> <input data-bind='value: address.street, valueUpdate: "keyup"' /></p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.zipCode, valueUpdate: "keyup"' /> <input data-bind='value: address.city, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: address.fullAddress'></h2>
+    <p><strong data-bind='text: address.fullAddress'></strong></p>
     <p style='padding-left: 1rem;'>Phones:</p>
     <div data-bind="foreach: phones">
-        <p style='padding-left: 3rem;'><input data-bind='value: number, valueUpdate: "keyup"' /> <span data-bind='text: number()'></span></p>
+        <p style='padding-left: 3rem;'><input data-bind='value: number, valueUpdate: "keyup"' /> <strong data-bind='text: number()'></strong></p>
     </div>
 </script>
 <div id='content-demo-nested' class='demo'></div>
@@ -245,14 +245,14 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-nested'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullName'></h2>
+    <p><strong data-bind='text: fullName'></strong></p>
     <p style='padding-left: 1rem;'>Address:</p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.number, valueUpdate: "keyup"' /> <input data-bind='value: address.street, valueUpdate: "keyup"' /></p>
     <p style='padding-left: 3rem;'><input data-bind='value: address.zipCode, valueUpdate: "keyup"' /> <input data-bind='value: address.city, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: address.fullAddress'></h2>
+    <p><strong data-bind='text: address.fullAddress'></strong></p>
     <p style='padding-left: 1rem;'>Phones:</p>
     <div data-bind="foreach: phones">
-        <p style='padding-left: 3rem;'><input data-bind='value: number, valueUpdate: "keyup"' /> <span data-bind='text: number()'></span></p>
+        <p style='padding-left: 3rem;'><input data-bind='value: number, valueUpdate: "keyup"' /> <strong data-bind='text: number()'></strong></p>
     </div>
 </script>
 <div id='content-demo-nested' class='demo'></div>
@@ -319,7 +319,7 @@ myView.render().bindData();
 <script type='text/html' id='tmpl-demo-viewmodel'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullName'></h2>
+    <p><strong data-bind='text: fullName'></strong></p>
 </script>
 <div id='content-demo-viewmodel' class='demo'></div>
 
@@ -368,7 +368,7 @@ myView.render();
 <script type='text/html' id='tmpl-demo-viewmodel'>
     <p>First name: <input data-bind='value: firstName, valueUpdate: "keyup"' /></p>
     <p>Last name: <input data-bind='value: lastName, valueUpdate: "keyup"' /></p>
-    <h2 data-bind='text: fullName'></h2>
+    <p><strong data-bind='text: fullName'></strong></p>
 </script>
 <div id='content-demo-viewmodel' class='demo'></div>
 {% endhighlight %}
