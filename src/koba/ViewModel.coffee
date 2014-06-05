@@ -57,10 +57,15 @@ koba.ViewModel = class
   listenTo = (viewModel, model, observable, property) ->
     viewModel.listenTo model, "change:#{property}", (model, value, options) ->
       observable(value)
+      
+  stopListening = (viewModel, model, observable, property) ->
+    viewModel.stopListening model, "change:#{property}"
         
   subscribe = (viewModel, model, observable, property) ->
     viewModel.__subscriptions.push observable.subscribe (value) ->
+      stopListening viewModel, model, observable, property
       model.set(property, value)
+      listenTo viewModel, model, observable, property
 
   observeArray = (array, collection, viewModel) ->
     observableArray = ko.observableArray array
