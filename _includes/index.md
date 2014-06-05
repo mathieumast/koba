@@ -18,7 +18,7 @@
 
 * Free and open source [MIT license](http://opensource.org/licenses/mit-license.php)
 
-* Small (4kb minified)
+* Small (5kb minified)
 
 ## Dependencies
 
