@@ -17,7 +17,7 @@ koba.ViewModel = class
     # is null
     unless obj
       if koba.utils.isModel parentModel
-        res = observe @, property, null, parentModel
+        res = observeProperty @, property, null, parentModel
     # is a Backbone model
     else if koba.utils.isModel obj
       res = {}
@@ -47,56 +47,44 @@ koba.ViewModel = class
     # is a property
     else
       if koba.utils.isModel parentModel
-        res = observe @, property, obj, parentModel
+        res = observeProperty @, property, obj, parentModel
     res
     
-  observe = (viewModel, property, value, model) ->
+  observeProperty = (viewModel, property, value, model) ->
     observable = ko.observable value
-    listenTo viewModel, model, observable, property
-    subscribe viewModel, model, observable, property
-    observable
-    
-  listenTo = (viewModel, model, observable, property) ->
-    viewModel.listenTo model, "change:#{property}", (model, value, options) ->
+    observable.__listenCallback = (model, value) ->
       observable(value)
-      
-  stopListening = (viewModel, model, observable, property) ->
-    viewModel.stopListening model, "change:#{property}"
-        
-  subscribe = (viewModel, model, observable, property) ->
-    viewModel.__subscriptions.push observable.subscribe (value) ->
-      stopListening viewModel, model, observable, property
+    observable.__subscribeCallback = (value) ->
+      viewModel.stopListening model, "change:#{property}", observable.__listenCallback
       model.set(property, value)
-      listenTo viewModel, model, observable, property
+      viewModel.listenTo model, "change:#{property}", observable.__listenCallback
+    viewModel.listenTo model, "change:#{property}", observable.__listenCallback
+    viewModel.__subscriptions.push observable.subscribe observable.__subscribeCallback
+    observable
     
   observeArray = (viewModel, array, collection) ->
     ko.observableArray array
 
   observeCollection = (viewModel, array, collection) ->
     observableCollection = ko.observableArray array
-    listenCollectionTo viewModel, collection, observableCollection
+    viewModel.listenTo collection, "add", (model, collection, options) ->
+      observableCollection.push viewModel.__constructViewModel model, collection, null
+    viewModel.listenTo collection, "remove", (model, collection, options) ->
+      observableCollection.remove model
+    viewModel.listenTo collection, "destroy", (model, collection, options) ->
+      observableCollection.remove model
+    viewModel.listenTo collection, "reset", (collection, options) ->
+      observableCollection.removeAll()
     observableCollection
     
-  listenCollectionTo = (viewModel, collection, observableArray) ->
-    viewModel.listenTo collection, "add", (model, collection, options) ->
-      observableArray.push viewModel.__constructViewModel model, collection, null
-    viewModel.listenTo collection, "remove", (model, collection, options) ->
-      observableArray.remove model
-    viewModel.listenTo collection, "destroy", (model, collection, options) ->
-      observableArray.remove model
-    viewModel.listenTo collection, "reset", (collection, options) ->
-      observableArray.removeAll()
-
   observeFunction = (viewModel, fnct, model) ->
     newVal = koba.utils.fnctCall fnct, model
     observable = ko.observable newVal
     observable.__latestValue = newVal
-    listenFunctionTo viewModel, model, observable, fnct
-    observable
-    
-  listenFunctionTo = (viewModel, model, observable, fnct) ->
-    viewModel.listenTo model, "change", (model, value, options) ->
+    observable.__listenCallback = () ->
       newVal = koba.utils.fnctCall fnct, model
       if newVal isnt observable.__latestValue
-        observable koba.utils.fnctCall fnct, model
+        observable newVal
         observable.__latestValue = newVal
+    viewModel.listenTo model, "change", observable.__listenCallback
+    observable

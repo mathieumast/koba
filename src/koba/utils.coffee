@@ -6,6 +6,6 @@ koba.utils =
   isCollection: (obj) ->
     return obj.models and obj.on
   
-  fnctCall: (fnct, context) ->
+  fnctCall: (fnct, context, value) ->
     try
-      fnct.call context
+      fnct.call context, value
