@@ -1,7 +1,7 @@
 Koba
 ====
 
-Koba, the bridge between Knockout and Backbone.
+Koba is a two-way data-binding library for [Backbone.js](http://backbonejs.org/) using [Knouckout.js](http://knockoutjs.com/). It enables Knockout's data-binding features for Backbone.
 
 Documentation for Koba is availlable online at the [Koba site](http://mathieumast.github.io/koba/).
 
