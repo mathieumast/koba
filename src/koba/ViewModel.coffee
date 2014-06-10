@@ -86,5 +86,13 @@ koba.ViewModel = class
       if newVal isnt observable.__latestValue
         observable newVal
         observable.__latestValue = newVal
+    observable.__subscribeCallback = (value) ->
+      viewModel.stopListening model, "change", observable.__listenCallback
+      newVal = koba.utils.fnctCall fnct, model, value
+      if newVal isnt observable.__latestValue
+        observable newVal
+        observable.__latestValue = newVal
+      viewModel.listenTo model, "change", observable.__listenCallback
     viewModel.listenTo model, "change", observable.__listenCallback
+    viewModel.__subscriptions.push observable.subscribe observable.__subscribeCallback
     observable
