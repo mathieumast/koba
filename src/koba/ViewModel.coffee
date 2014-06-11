@@ -14,10 +14,10 @@ koba.ViewModel = class
     @__data = null
     
   __constructViewModel: (obj, parentModel, property) ->
-    # is null
-    unless obj
+    # is a property
+    if koba.utils.isProperty obj
       if koba.utils.isModel parentModel
-        res = observeProperty @, property, null, parentModel
+        res = observeProperty @, property, obj, parentModel
     # is a Backbone model
     else if koba.utils.isModel obj
       res = {}
@@ -44,10 +44,6 @@ koba.ViewModel = class
       res = {}
       for attr, value of obj
         res[attr] = @__constructViewModel value, parentModel, attr
-    # is a property
-    else
-      if koba.utils.isModel parentModel
-        res = observeProperty @, property, obj, parentModel
     res
     
   observeProperty = (viewModel, property, value, model) ->
@@ -83,13 +79,13 @@ koba.ViewModel = class
     observable.__latestValue = newVal
     observable.__listenCallback = () ->
       newVal = koba.utils.fnctCall fnct, model
-      if newVal isnt observable.__latestValue
+      if koba.utils.isProperty(newVal) and newVal isnt observable.__latestValue
         observable newVal
         observable.__latestValue = newVal
     observable.__subscribeCallback = (value) ->
       viewModel.stopListening model, "change", observable.__listenCallback
       newVal = koba.utils.fnctCall fnct, model, value
-      if newVal isnt observable.__latestValue
+      if koba.utils.isProperty(newVal) and newVal isnt observable.__latestValue
         observable newVal
         observable.__latestValue = newVal
       viewModel.listenTo model, "change", observable.__listenCallback
