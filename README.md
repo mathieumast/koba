@@ -21,6 +21,8 @@ Documentation for Koba is availlable online at the [Koba site](http://mathieumas
 
 * Compatible with Backbone models and collections (and nested models and collections)
 
+* Computed attributes
+
 * Free and open source [MIT license](http://opensource.org/licenses/mit-license.php)
 
 * Small (5kb minified)
