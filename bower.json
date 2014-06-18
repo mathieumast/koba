@@ -1,6 +1,6 @@
 {
     "name": "koba",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Koba is a two-way data-binding library for Backbone.js using Knouckout.js. It enables Knockout's data-binding features for Backbone.",
     "homepage": "https://github.com/mathieumast/koba",
     "keywords": ["knockout", "backbone", "data-binding", "binding", "two", "way"],
