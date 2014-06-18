@@ -1,6 +1,6 @@
 
 /*
-Koba 1.0.5
+Koba 1.0.6
 Bridge between Knockout and Backbone.
 Copyright (c) 2014, Mathieu MAST https://github.com/mathieumast/koba
 Licensed under the MIT license
@@ -28,6 +28,23 @@ Licensed under the MIT license
   }
 
   root.koba = koba;
+
+  koba.utils = {
+    isModel: function(obj) {
+      return obj && obj.attributes && obj.set && obj.on;
+    },
+    isCollection: function(obj) {
+      return obj.models && obj.on;
+    },
+    isProperty: function(val) {
+      return _.isNull(val) || _.isString(val) || _.isBoolean(val) || _.isNumber(val) || _.isDate(val);
+    },
+    fnctCall: function(fnct, context, value) {
+      try {
+        return fnct.call(context, value);
+      } catch (_error) {}
+    }
+  };
 
   koba.View = (function(_super) {
     __extends(_Class, _super);
@@ -72,13 +89,13 @@ Licensed under the MIT license
   })(Backbone.View);
 
   koba.ViewModel = (function() {
-    var fnctCall, listenCollectionTo, listenFunctionTo, listenTo, observe, observeArray, observeFunction, stopListening, subscribe;
+    var observeArray, observeCollection, observeFunction, observeProperty;
 
     function _Class(__data) {
       this.__data = __data;
       this.__subscriptions = [];
       _.extend(this, Backbone.Events);
-      _.extend(this, this.__constructViewModel(this.__data, null, null));
+      _.extend(this, this.__constructViewModel(this.__data));
     }
 
     _Class.prototype.destroy = function() {
@@ -93,126 +110,110 @@ Licensed under the MIT license
       return this.__data = null;
     };
 
-    _Class.prototype.__constructViewModel = function(obj, parentBackboneModel, property) {
+    _Class.prototype.__constructViewModel = function(obj, parentModel, property) {
       var attr, res, tbl, value, _i, _j, _len, _len1, _ref, _ref1;
-      if (!obj) {
-        res = observe(property, null, parentBackboneModel, this);
-      } else if (obj.attributes && obj.set && obj.on) {
+      if (koba.utils.isProperty(obj)) {
+        if (koba.utils.isModel(parentModel)) {
+          res = observeProperty(this, property, obj, parentModel);
+        }
+      } else if (koba.utils.isModel(obj)) {
         res = {};
         _ref = obj.attributes;
         for (attr in _ref) {
           value = _ref[attr];
           res[attr] = this.__constructViewModel(value, obj, attr);
         }
-      } else if (obj.models && obj.on) {
+      } else if (koba.utils.isCollection(obj)) {
         tbl = [];
         _ref1 = obj.models;
         for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
           value = _ref1[_i];
-          tbl.push(this.__constructViewModel(value, parentBackboneModel, null));
+          tbl.push(this.__constructViewModel(value));
         }
-        res = observeArray(tbl, obj, this);
+        res = observeCollection(this, tbl, obj);
       } else if (_.isFunction(obj)) {
-        res = observeFunction(obj, parentBackboneModel, this);
+        if (koba.utils.isModel(parentModel)) {
+          res = observeFunction(this, obj, parentModel);
+        }
       } else if (_.isArray(obj)) {
         tbl = [];
         for (_j = 0, _len1 = obj.length; _j < _len1; _j++) {
           value = obj[_j];
-          tbl.push(this.__constructViewModel(value, parentBackboneModel, null));
+          tbl.push(this.__constructViewModel(value, parentModel));
         }
-        res = observeArray(tbl, null, this);
+        res = observeArray(this, tbl, null);
       } else if (_.isObject(obj)) {
         res = {};
         for (attr in obj) {
           value = obj[attr];
-          res[attr] = this.__constructViewModel(value, parentBackboneModel, attr);
+          res[attr] = this.__constructViewModel(value, parentModel, attr);
         }
-      } else {
-        res = observe(property, obj, parentBackboneModel, this);
       }
       return res;
     };
 
-    observe = function(property, value, model, viewModel) {
+    observeProperty = function(viewModel, property, value, model) {
       var observable;
       observable = ko.observable(value);
-      if (model && model.attributes && model.set && model.on && property) {
-        listenTo(viewModel, model, observable, property);
-        subscribe(viewModel, model, observable, property);
-      }
+      observable.__listenCallback = function(model, value) {
+        return observable(value);
+      };
+      observable.__subscribeCallback = function(value) {
+        viewModel.stopListening(model, "change:" + property, observable.__listenCallback);
+        model.set(property, value);
+        return viewModel.listenTo(model, "change:" + property, observable.__listenCallback);
+      };
+      viewModel.listenTo(model, "change:" + property, observable.__listenCallback);
+      viewModel.__subscriptions.push(observable.subscribe(observable.__subscribeCallback));
       return observable;
     };
 
-    listenTo = function(viewModel, model, observable, property) {
-      return viewModel.listenTo(model, "change:" + property, function(model, value, options) {
-        return observable(value);
-      });
+    observeArray = function(viewModel, array, collection) {
+      return ko.observableArray(array);
     };
 
-    stopListening = function(viewModel, model, observable, property) {
-      return viewModel.stopListening(model, "change:" + property);
-    };
-
-    subscribe = function(viewModel, model, observable, property) {
-      return viewModel.__subscriptions.push(observable.subscribe(function(value) {
-        stopListening(viewModel, model, observable, property);
-        model.set(property, value);
-        return listenTo(viewModel, model, observable, property);
-      }));
-    };
-
-    observeArray = function(array, collection, viewModel) {
-      var observableArray;
-      observableArray = ko.observableArray(array);
-      if (collection) {
-        listenCollectionTo(viewModel, collection, observableArray);
-      }
-      return observableArray;
-    };
-
-    listenCollectionTo = function(viewModel, collection, observableArray) {
+    observeCollection = function(viewModel, array, collection) {
+      var observableCollection;
+      observableCollection = ko.observableArray(array);
       viewModel.listenTo(collection, "add", function(model, collection, options) {
-        return observableArray.push(viewModel.__constructViewModel(model, collection, null));
+        return observableCollection.push(viewModel.__constructViewModel(model, collection, null));
       });
       viewModel.listenTo(collection, "remove", function(model, collection, options) {
-        return observableArray.remove(model);
+        return observableCollection.remove(model);
       });
       viewModel.listenTo(collection, "destroy", function(model, collection, options) {
-        return observableArray.remove(model);
+        return observableCollection.remove(model);
       });
-      return viewModel.listenTo(collection, "reset", function(collection, options) {
-        return observableArray.removeAll();
+      viewModel.listenTo(collection, "reset", function(collection, options) {
+        return observableCollection.removeAll();
       });
+      return observableCollection;
     };
 
-    observeFunction = function(fnct, model, viewModel) {
+    observeFunction = function(viewModel, fnct, model) {
       var newVal, observable;
-      newVal = fnctCall(fnct, model);
+      newVal = koba.utils.fnctCall(fnct, model);
       observable = ko.observable(newVal);
       observable.__latestValue = newVal;
-      if (model && model.attributes && model.set && model.on) {
-        listenFunctionTo(viewModel, model, observable, fnct);
-      }
-      return observable;
-    };
-
-    listenFunctionTo = function(viewModel, model, observable, fnct) {
-      return viewModel.listenTo(model, "change", function(model, value, options) {
-        var newVal;
-        newVal = fnctCall(fnct, model);
-        if (newVal !== observable.__latestValue) {
-          observable(fnctCall(fnct, model));
+      observable.__listenCallback = function() {
+        newVal = koba.utils.fnctCall(fnct, model);
+        if (koba.utils.isProperty(newVal) && newVal !== observable.__latestValue) {
+          observable(newVal);
           return observable.__latestValue = newVal;
         }
-      });
-    };
-
-    fnctCall = function(fnct, model) {
-      try {
-        return fnct.call(model);
-      } finally {
-        null;
-      }
+      };
+      observable.__subscribeCallback = function(value) {
+        viewModel.stopListening(model, "change", observable.__listenCallback);
+        newVal = koba.utils.fnctCall(fnct, model, value);
+        if (koba.utils.isProperty(newVal) && newVal !== observable.__latestValue) {
+          observable(newVal);
+          observable.__latestValue = newVal;
+        }
+        return viewModel.listenTo(model, "change", observable.__listenCallback);
+      };
+      viewModel.listenTo(model, "change", observable.__listenCallback);
+      viewModel.__subscriptions.push(observable.subscribe(observable.__subscribeCallback));
+      return observable;
     };
 
     return _Class;
