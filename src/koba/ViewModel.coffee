@@ -3,7 +3,7 @@ koba.ViewModel = class
   constructor: (@__data) ->
     @__subscriptions = []
     _.extend @, Backbone.Events
-    _.extend @, @__constructViewModel @__data
+    _.extend @, @__constructViewModel @__data, new Backbone.Model
   
   # destroy viewModel
   destroy: ->

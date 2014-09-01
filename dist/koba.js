@@ -96,7 +96,7 @@ Licensed under the MIT license
       this.__data = __data;
       this.__subscriptions = [];
       _.extend(this, Backbone.Events);
-      _.extend(this, this.__constructViewModel(this.__data));
+      _.extend(this, this.__constructViewModel(this.__data, new Backbone.Model));
     }
 
     _Class.prototype.destroy = function() {
