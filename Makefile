@@ -2,6 +2,6 @@ build:
 	npm install
 	bower install
 	rm -f dist/*
-	coffee --compile --no-header --join koba.js --output dist src/koba.coffee src/koba/*.coffee 
+	cat src/koba.coffee src/koba/*.coffee | coffee --compile --stdio > dist/koba.js
 	uglifyjs dist/koba.js --comments all --output dist/koba.min.js
 	
